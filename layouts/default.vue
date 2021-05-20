@@ -1,20 +1,18 @@
 <template>
   <div>
+    <a-menu v-model="current" mode="horizontal" theme="dark">
+      <a-menu-item key="home"> Brandon Martinez</a-menu-item>
+      <a-menu-item key="mail"> <a-icon type="profile" />About Me</a-menu-item>
+      <a-menu-item key="app"> <a-icon type="appstore" />My Projects</a-menu-item>
+    </a-menu>
     <Nuxt />
   </div>
 </template>
 
 <style>
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -58,5 +56,9 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+.name {
+  color: #ff6619;
+  text-size: 24px;
 }
 </style>
