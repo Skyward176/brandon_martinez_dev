@@ -16,7 +16,7 @@
       </a-col>
       <a-col :span=6>
         <div>
-          <font-awesome-icon :icon="['fab', 'js-square']" />   
+          <font-awesome-icon :icon="['fab', 'js-square']" class='techIcons'/>   
         </div>
       </a-col>
     </a-row>
@@ -28,4 +28,7 @@ export default {}
 </script>
 
 <style>
+.techIcons {
+  font-size: 5vw;
+}
 </style>
