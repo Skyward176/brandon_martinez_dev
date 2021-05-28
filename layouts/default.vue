@@ -1,11 +1,22 @@
 <template>
   <div>
-    <a-menu v-model="current" mode="horizontal" theme="dark">
-      <a-menu-item key="home"> Brandon Martinez</a-menu-item>
-      <a-menu-item key="mail"> <a-icon type="profile" />About Me</a-menu-item>
-      <a-menu-item key="app"> <a-icon type="appstore" />My Projects</a-menu-item>
-    </a-menu>
-    <Nuxt />
+    <a-layout>
+      <a-menu v-model="current" mode="horizontal" theme="dark">
+        <a-menu-item key="home"> Brandon Martinez</a-menu-item>
+        <a-menu-item key="mail"> <a-icon type="profile" />About Me</a-menu-item>
+        <a-menu-item key="app"> <a-icon type="appstore" />My Projects</a-menu-item>
+      </a-menu>
+
+
+      <a-layout-content>
+        <Nuxt/>
+      </a-layout-content>
+
+
+      <a-layout-footer>
+        Footer
+      </a-layout-footer>
+    </a-layout>
   </div>
 </template>
 
