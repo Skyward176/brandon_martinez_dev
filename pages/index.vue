@@ -16,7 +16,30 @@
       </a-col>
       <a-col :span=6>
         <div>
-          <font-awesome-icon :icon="['fab', 'js-square']" class='techIcons'/>   
+          <a-row>
+            <a-col :span=6>
+              <font-awesome-icon :icon="['fab', 'js-square']" class='techIcons'/>   
+            </a-col>
+            <a-col :span=18>
+              <p> JavaScript</p>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col :span=6>
+              <font-awesome-icon :icon="['fab', 'js-square']" class='techIcons'/>   
+            </a-col>
+            <a-col :span=18>
+              <p> JavaScript</p>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col :span=6>
+              <font-awesome-icon :icon="['fab', 'js-square']" class='techIcons'/>   
+            </a-col>
+            <a-col :span=18>
+              <p> JavaScript</p>
+            </a-col>
+          </a-row>
         </div>
       </a-col>
     </a-row>

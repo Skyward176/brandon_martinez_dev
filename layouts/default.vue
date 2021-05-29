@@ -2,7 +2,7 @@
   <div>
     <a-layout>
       <a-menu v-model="current" mode="horizontal" theme="dark">
-        <a-menu-item key="home"> Brandon Martinez</a-menu-item>
+        <a-menu-item key="home" class='name'> Brandon Martinez</a-menu-item>
         <a-menu-item key="mail"> <a-icon type="profile" />About Me</a-menu-item>
         <a-menu-item key="app"> <a-icon type="appstore" />My Projects</a-menu-item>
       </a-menu>
@@ -14,7 +14,8 @@
 
 
       <a-layout-footer>
-        Footer
+        <div class = 'footer'>
+        </div>
       </a-layout-footer>
     </a-layout>
   </div>
@@ -33,43 +34,8 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
 .name {
-  color: #ff6619;
-  text-size: 24px;
+  color: orangered;
+  font-size: 1.5rem;
 }
 </style>
