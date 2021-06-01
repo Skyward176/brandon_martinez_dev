@@ -59,7 +59,7 @@ export default {}
 h1 {
   font-size: 2.5rem;
 }
-p {
+.main-text {
   font-size: 1.5rem;
 }
 </style>
