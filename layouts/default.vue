@@ -41,7 +41,7 @@
 
 <style>
   .name {
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding:0;
     margin:auto auto auto auto;
   }
