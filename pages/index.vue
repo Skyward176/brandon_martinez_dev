@@ -17,32 +17,23 @@
         </div>
       </a-col>
       <a-col :span=7>
-        <div>
-          <a-row>
-            <a-col :span=6>
-              <font-awesome-icon :icon="['fab', 'js-square']" class='techIcons accent-color'/>   
-            </a-col>
-            <a-col :span=18>
-              <p> JavaScript</p>
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col :span=6>
-              <font-awesome-icon :icon="['fab', 'js-square']" class='techIcons accent-color'/>   
-            </a-col>
-            <a-col :span=18>
-              <p> JavaScript</p>
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col :span=6>
-              <font-awesome-icon :icon="['fab', 'js-square']" class='techIcons accent-color'/>   
-            </a-col>
-            <a-col :span=18>
-              <p> JavaScript</p>
-            </a-col>
-          </a-row>
-        </div>
+        <a-row type='flex' justify='center'>
+          <a-col>
+            <h1 class='accent-color'> Technologies </h1>
+            <div class='main-text'>
+              <ul class='tech-list'>
+                <li><font-awesome-icon :icon="['fab', 'js-square']" class='tech-icons accent-color'/> <p> &nbsp;JavaScript</p></li>
+                <li><font-awesome-icon :icon="['fab', 'js-square']" class='tech-icons accent-color'/> <p> &nbsp;JavaScript</p></li>
+                <li><font-awesome-icon :icon="['fab', 'js-square']" class='tech-icons accent-color'/> <p> &nbsp;JavaScript</p></li>
+                <li><font-awesome-icon :icon="['fab', 'js-square']" class='tech-icons accent-color'/> <p> &nbsp;JavaScript</p></li>
+                <li><font-awesome-icon :icon="['fab', 'js-square']" class='tech-icons accent-color'/> <p> &nbsp;JavaScript</p></li>
+                <li><font-awesome-icon :icon="['fab', 'js-square']" class='tech-icons accent-color'/> <p> &nbsp;JavaScript</p></li>
+                <li><font-awesome-icon :icon="['fab', 'js-square']" class='tech-icons accent-color'/> <p> &nbsp;JavaScript</p></li>
+                <li><font-awesome-icon :icon="['fab', 'js-square']" class='tech-icons accent-color'/> <p> &nbsp;JavaScript</p></li>
+              </ul>
+            </div>
+          </a-col>
+        </a-row>
       </a-col>
     </a-row>
   </div>
@@ -53,13 +44,20 @@ export default {}
 </script>
 
 <style>
-.techIcons {
-  font-size: 5vw;
-}
 h1 {
   font-size: 2.5rem;
 }
-.main-text {
+.main-text p{
   font-size: 1.5rem;
+}
+.tech-icons {
+  font-size: 2rem;
+}
+.tech-list {
+    list-style-type: none;
+}
+.tech-list li {
+    justify-content: left;
+    display:flex;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='page-wrapper'>
     <a-layout>
       <a-menu v-model="current" mode="horizontal" theme="dark">
       <a-menu-item key="home"> <p class='name accent-color'>Brandon Martinez</p></a-menu-item>
@@ -40,6 +40,10 @@
 
 
 <style>
+  .page-wrapper {
+      display:flex;
+      min-height:100vh;
+  }
   .name {
     font-size: 2rem;
     padding:0;
@@ -60,21 +64,21 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','Noto Color Emoji';
     color: #9cadb4;
   }
-  li {
+  .footer li {
       float: left;
   }
 
-  a {
+  .footer a {
       padding: 8px;
       font-size:1.5 rem;
       color:inherit;
   }
-  a:hover {
+  .footer a:hover {
       text-decoration:none;
       color:inherit;
   }
 
-  ul {
+  .footer ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
