@@ -3,8 +3,8 @@
     <a-layout>
       <a-menu v-model="current" mode="horizontal" theme="dark">
       <a-menu-item key="home"> <p class='name accent-color'>Brandon Martinez</p></a-menu-item>
-        <a-menu-item key="projects" class='navbar-items'> <font-awesome-icon :icon="['fas', 'project-diagram']"/> &nbsp;Projects</a-menu-item>
-        <a-menu-item key="about" class='navbar-items'> <font-awesome-icon :icon="['fas', 'id-badge']"/> &nbsp;About Me</a-menu-item>
+      <a-menu-item key="projects" class='navbar-items'> <a href='/projects'><font-awesome-icon :icon="['fas', 'project-diagram']"/> &nbsp;Projects </a></a-menu-item>
+        <a-menu-item key="about" class='navbar-items'> <a href='/'><font-awesome-icon :icon="['fas', 'id-badge']"/> &nbsp;About Me</a></a-menu-item>
       </a-menu>
 
       <a-layout-content>
@@ -17,13 +17,13 @@
           <a-col>
             <div >
               <ul>
-                  <li class='footer_item'><a href='#'>Home</a></li>
+                  <li class='footer_item'><a href='/'>Home</a></li>
                   <li class ='footer_item'><p class='accent-color'>|</p></li>
-                  <li class='footer_item'><a href='#'>Projects</a></li>
+                  <li class='footer_item'><a href='/projects'>Projects</a></li>
                   <li class='footer_item'><p><span class='accent-color'>|</span> Find me: </p></li>
-                  <li class='footer_item'><p>&nbsp;<font-awesome-icon :icon="['fab', 'github']" class='accent-color'/> Github </p></li>
-                  <li class='footer_item'><p>&nbsp;<font-awesome-icon :icon="['fas', 'envelope-open-text']" class='accent-color'/> eMail </p></li>
-                  <li class='footer_item'><p>&nbsp;<font-awesome-icon :icon="['fas', 'phone-square-alt']" class='accent-color'/> Phone </p></li>
+                  <li class='footer_item'><p>&nbsp;<a href='https://github.com/Skyward176'><font-awesome-icon :icon="['fab', 'github']" class='accent-color'/> Github </a></p></li>
+                  <li class='footer_item'><p>&nbsp;<a href='mailto:contact@brandonmartinez.dev'><font-awesome-icon :icon="['fas', 'envelope-open-text']" class='accent-color'/> eMail </a></p></li>
+                  <li class='footer_item'><p>&nbsp;<a href='tel:+17328102978'><font-awesome-icon :icon="['fas', 'phone-square-alt']" class='accent-color'/> Phone </a></p></li>
               </ul>
             </div>
           </a-col>
@@ -58,7 +58,7 @@
     display:block;
   }
   .navy-background {
-    background-color:#001529; 
+    background-color:#001529;
   }
   .footer {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','Noto Color Emoji';
