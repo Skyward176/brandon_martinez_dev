@@ -2,12 +2,11 @@
   <div>
     <a-card title="Default size card" style="width: 300px">
       <a slot="extra" href="#">more</a>
-      <p>card content</p>
-      <p>card content</p>
+      <p> {{projects[0].name}}</p>
+      <p>{{projects[0].description}}</p>
       <p>card content</p>
     </a-card>
   </div>
-  <nuxt-content :document="projects" />
 </template>
 
 <script>
@@ -15,12 +14,11 @@ export default {
   async asyncData ({ $content }) {
     const projects = await $content('projects').fetch()
 
-    return {
+    return{
       projects
     }
   }
 }
-</scr
 </script>
 
 <style>

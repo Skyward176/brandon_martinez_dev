@@ -3,8 +3,8 @@
     <a-layout>
       <a-menu v-model="current" mode="horizontal" theme="dark">
       <a-menu-item key="home"> <p class='name accent-color'>Brandon Martinez</p></a-menu-item>
-      <a-menu-item key="projects" class='navbar-items'> <a href='/projects'><font-awesome-icon :icon="['fas', 'project-diagram']"/> &nbsp;Projects </a></a-menu-item>
-        <a-menu-item key="about" class='navbar-items'> <a href='/'><font-awesome-icon :icon="['fas', 'id-badge']"/> &nbsp;About Me</a></a-menu-item>
+      <a-menu-item key="projects" class='navbar-items'> <nuxt-link to='projects'><font-awesome-icon :icon="['fas', 'project-diagram']"/> &nbsp;Projects </nuxt-link></a-menu-item>
+        <a-menu-item key="about" class='navbar-items'> <nuxt-link to='/'><font-awesome-icon :icon="['fas', 'id-badge']"/> &nbsp;About Me</nuxt-link></a-menu-item>
       </a-menu>
 
       <a-layout-content>
