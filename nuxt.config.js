@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'portfolio_site',
+    title: 'Brandon Martinez',
     htmlAttrs: {
       lang: 'en'
     },
