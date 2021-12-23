@@ -1,30 +1,39 @@
 <template>
-  <div style="background-color: #ececec; padding: 20px;">
-    <div>
-      <a-carousel :dot-position="bottom">
-        <div v-for="project of projects">
-          <h3>{{project.name}}</h3>
-        </div>
-      </a-carousel>
-    </div>
-
-    <a-row :gutter="16">
-      <a-col v-for="project of projects" :flex="1">
-        <a-card :title=project.name :bordered="false" >
-          {{project.description}}
-        </a-card>
-        <a-divider/>
-      </a-col>
-    </a-row>
+  <div class="container" style="background-color: #ececec; padding: 20px;">
+    <a-card class="box-item" v-for="project in projects" :title=project.name :bordered="false" :key="project.name" hoverable>
+      <img
+        slot="cover"
+        alt="/images/mikuSad.jpg"
+        src="/images/mikuSad.jpg"
+      />
+      <p>{{project.description}}</p>
+      <p><a :href=project.url><a-button type="primary">Find it here!</a-button></a></p>
+    </a-card>
   </div>
 </template>
 <style scoped>
-  .ant-carousel >>> .slick-slide {
-    text-align: center;
-    background: #364d79;
+  @media (max-width: 599px) {
+    .box-item {
+      width: 80%;
+    }
   }
-  .ant-carousel >>> .slick-slide h3 {
-    color: #fff;
+  @media (min-width: 600px) { 
+    .box-item {
+      width: 49%;
+      margin: 1em auto 1em auto;
+    }
+  }
+  @media (min-width: 900px) {
+    .box-item {
+      width: 32%;
+      margin: 1em auto 1em auto;
+    }
+  }
+  .container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
   }
 </style>
 <script>
