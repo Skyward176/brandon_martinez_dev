@@ -4,7 +4,7 @@
       <img
         slot="cover"
         alt="/images/mikuSad.jpg"
-        src="/images/mikuSad.jpg"
+        :src=project.img
       />
       <p>{{project.description}}</p>
       <p><a :href=project.url><a-button type="primary">Find it here!</a-button></a></p>
@@ -14,18 +14,19 @@
 <style scoped>
   @media (max-width: 599px) {
     .box-item {
-      width: 80%;
+      max-width: 80%;
+      margin: 1em auto 1em auto;
     }
   }
   @media (min-width: 600px) { 
     .box-item {
-      width: 49%;
+      max-width: 49%;
       margin: 1em auto 1em auto;
     }
   }
   @media (min-width: 900px) {
     .box-item {
-      width: 32%;
+      max-width: 32%;
       margin: 1em auto 1em auto;
     }
   }
