@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'portfolio_site',
+    title: 'Brandon Martinez',
     htmlAttrs: {
       lang: 'en'
     },
@@ -40,6 +40,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxt/content'
   ],
   // Fontawesome Config
   fontawesome: {
