@@ -6,7 +6,7 @@ export default {}
     <img
         class="profileImage"
         src="/profile.jpg"
-        width="80%"
+        width="100%"
         border-radius="20px"
     />
 </template>
