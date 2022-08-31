@@ -89,6 +89,20 @@
                                     />
                                     <p>&nbsp;&nbsp;Amazon Web Services</p>
                                 </li>
+                                <li>
+                                    <font-awesome-icon
+                                        :icon="['fab', 'js-square']"
+                                        class="tech-icons accent-color"
+                                    />
+                                    <p>&nbsp;&nbsp;Next.JS</p>
+                                </li>
+                                <li>
+                                    <font-awesome-icon
+                                        :icon="['fas', 'fa-wind']"
+                                        class="tech-icons accent-color"
+                                    />
+                                    <p>&nbsp;&nbsp;TailwindCSS</p>
+                                </li>
                             </ul>
                         </div>
                     </a-col>
