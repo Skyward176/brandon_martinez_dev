@@ -1,0 +1,6 @@
+{
+  "name":"dialedIn-frontend",
+  "description":"The frontend to dialedIn. Built using Next.js and React, together with TailwindCSS and Axios for requests. Progressing nicely.",
+  "url":"https://github.com/Skyward176/dialedIn-frontend",
+  "img":"/images/dialedIn-frontend.png"
+}
