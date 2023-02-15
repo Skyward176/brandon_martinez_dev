@@ -21,9 +21,6 @@ export default defineNuxtConfig({
     },
     // Global page headers: https://go.nuxtjs.dev/config-head
 
-    // Global CSS: https://go.nuxtjs.dev/config-css
-    css: ['ant-design-vue/dist/antd.css'],
-
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     //plugins: ['@/plugins/antd-ui'],
 
@@ -35,9 +32,7 @@ export default defineNuxtConfig({
         // https://go.nuxtjs.dev/axios
         '@nuxt/content',
         'nuxt-icon',
-        'nuxt-windicss'
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
-    build: {},
 })

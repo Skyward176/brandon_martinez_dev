@@ -1,72 +1,42 @@
 <template>
     <div class="page-wrapper">
         <Navbar />
-        <a-layout-content>
+        <div>
             <slot />
-        </a-layout-content>
-
-        <a-layout-footer class="navy-background footer">
-            <a-row>
-                <a-col>
-                    <div>
-                        <ul>
-                            <li class="footer_item">
-                                <a href="/">Home</a>
-                            </li>
-                            <li class="footer_item">
-                                <p class="accent-color">|</p>
-                            </li>
-                            <li class="footer_item">
-                                <a href="/projects">Projects</a>
-                            </li>
-                            <li class="footer_item">
-                                <p>
-                                    <span class="accent-color">|</span> Find me:
-                                </p>
-                            </li>
-                            <li class="footer_item">
-                                <p>
-                                    &nbsp;<a
-                                        href="https://github.com/Skyward176"
-                                        ><font-awesome-icon
-                                            :icon="['fab', 'github']"
-                                            class="accent-color"
-                                        />
-                                        Github
-                                    </a>
-                                </p>
-                            </li>
-                            <li class="footer_item">
-                                <p>
-                                    &nbsp;<a
-                                        href="mailto:contact@brandonmartinez.dev"
-                                        ><font-awesome-icon
-                                            :icon="[
-                                                'fas',
-                                                'envelope-open-text',
-                                            ]"
-                                            class="accent-color"
-                                        />
-                                        eMail
-                                    </a>
-                                </p>
-                            </li>
-                            <li class="footer_item">
-                                <p>
-                                    &nbsp;<a href="tel:+17328102978"
-                                        ><font-awesome-icon
-                                            :icon="['fas', 'phone-square-alt']"
-                                            class="accent-color"
-                                        />
-                                        Phone
-                                    </a>
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
-                </a-col>
-            </a-row>
-        </a-layout-footer>
+        </div>
+        <div>
+            <ul>
+                <li class="footer_item">
+                    <a href="/">Home</a>
+                </li>
+                <li class="footer_item">
+                    <p class="accent-color">|</p>
+                </li>
+                <li class="footer_item">
+                    <a href="/projects">Projects</a>
+                </li>
+                <li class="footer_item">
+                    <p><span class="accent-color">|</span> Find me:</p>
+                </li>
+                <li class="footer_item">
+                    <p>
+                        &nbsp;<a href="https://github.com/Skyward176">
+                            Github
+                        </a>
+                    </p>
+                </li>
+                <li class="footer_item">
+                    <p>
+                        &nbsp;<a href="mailto:contact@brandonmartinez.dev">
+                            eMail
+                        </a>
+                    </p>
+                </li>
+                <li class="footer_item">
+                    <p>&nbsp;<a href="tel:+17328102978"> Phone</a></p>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 

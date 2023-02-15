@@ -8,10 +8,7 @@
                     </p></a-menu-item
                 >
                 <a-menu-item key="projects" class="navbar-items">
-                    <nuxt-link to="projects"
-                        ><font-awesome-icon
-                            :icon="['fas', 'project-diagram']"
-                        />
+                    <nuxt-link to="projects">
                         &nbsp;Projects
                     </nuxt-link></a-menu-item
                 >
