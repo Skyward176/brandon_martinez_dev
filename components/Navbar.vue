@@ -1,6 +1,6 @@
 <template>
     <div className='w-full flex flex-row h-16 bg-black shadow-lg'>
-        <div className='w-1/2 my-auto mx-2'>
+        <div className=' w-1/2 my-auto mx-2'>
             <NuxtLink href='/'>
                 <p className='font-light font-sans text-4xl text-gray-50'>
                     Brandon <span className='text-teal-300'>Martinez</span>
