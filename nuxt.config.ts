@@ -32,6 +32,7 @@ export default defineNuxtConfig({
         // https://go.nuxtjs.dev/axios
         '@nuxt/content',
         'nuxt-icon',
+        '@nuxtjs/tailwindcss'
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build

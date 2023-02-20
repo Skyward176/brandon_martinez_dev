@@ -15,7 +15,7 @@
                     <p>Projects</p>
                 </NuxtLink>
             </div>
-            <div className="w 1/24 ">
+            <div className="w 1/24">
                 <NuxtLink to="/">
                     <p>Projects</p>
                 </NuxtLink>
