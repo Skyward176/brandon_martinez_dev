@@ -1,25 +1,23 @@
 <template>
-    <nav
-        className="w-full h-1/16 bg-black shadow-lg absolute divide-y divide-gray-50 flex items-center"
-    >
-        <div className=" mx-3 w-7/8">
-            <NuxtLink to="/">
-                <p className="font-light font-sans text-4xl text-gray-50">
+    <div className='w-full flex flex-row h-16 bg-black shadow-lg'>
+        <div className='basis-3/4 w-3/4 my-auto mx-2'>
+            <NuxtLink href='/'>
+                <p className='font-light font-sans text-4xl text-gray-50'>
                     Brandon Martinez
                 </p>
             </NuxtLink>
         </div>
-        <div className="flex flex-row-reverse w-1/8 align-text-middle">
-            <div className="mx-auto">
-                <NuxtLink to="projects">
-                    <p>Projects</p>
-                </NuxtLink>
-            </div>
-            <div className="w 1/24">
-                <NuxtLink to="/">
-                    <p>Projects</p>
-                </NuxtLink>
-            </div>
+        <div className='basis-1/4 w-1/4 flex flex-row-reverse my-auto '>
+            <NuxtLink className='' to="projects">
+                <p className='font-light font-sans text-xl text-gray-50 mx-2'>
+                    Projects
+                </p>
+            </NuxtLink>
+            <NuxtLink className='' to="/">
+                <p className='font-light font-sans text-xl text-gray-50 mx-2'>
+                    About Me
+                </p>
+            </NuxtLink>
         </div>
-    </nav>
+    </div>
 </template>
