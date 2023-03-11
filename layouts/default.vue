@@ -1,7 +1,7 @@
 <template>
     <div class="page-wrapper">
         <a-layout>
-            <a-menu v-model="current" mode="horizontal" theme="dark">
+            <a-menu v-model="current" mode="horizontal" theme="dark" class="black">
                 <a-menu-item key="home">
                     <p class="name accent-color">
                         Brandon Martinez
@@ -27,7 +27,7 @@
                 <Nuxt />
             </a-layout-content>
 
-            <a-layout-footer class="navy-background footer">
+            <a-layout-footer class="dark-background footer">
                 <a-row>
                     <a-col>
                         <div>
@@ -119,8 +119,8 @@ export default {}
     float: right;
     display: block;
 }
-.navy-background {
-    background-color: #001529;
+.dark-background {
+    background-color: #000000;
 }
 .footer {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,

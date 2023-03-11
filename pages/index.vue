@@ -1,23 +1,18 @@
 <template>
     <div>
-        <a-divider class="title"><h1 class="accent-color">About me</h1></a-divider>
+        <a-divider class="title"><h1 class = "accent-color">About Me</h1></a-divider>
         <div class="container">
             <div class="left">
                 <Profile />
             </div>
             <div class="middle main-text">
                 <p>
-                    My name is Brandon, and I love to code. I’m trying to
-                    learn all I can, every day. So far, I’ve worked with
-                    Django and Python a lot. I’ve also had the pleasure of
-                    working on websites using HTML/JavaScript/CSS. Recently,
-                    I’ve been experimenting with JavaScript frameworks such
-                    as Vue, React, and NuxtJS. I’ve also done coursework
-                    with Java and played with Rust, C, C++ and Flutter. The
-                    purpose of this site is to document the projects I make
-                    as I continue to learn and do bigger, cooler things with
-                    code. You can see some of the tech I’ve worked with on
-                    the right, or see my contact info below.
+                    A second year Computer Science student and software developer. Currently focused on full-stack Web Development.
+                    Proudly rocking a 3.9 GPA and currently on the market for internships or part time work.
+                    My current goals are improving my React powers, becoming a better designer, and expanding my online presence.
+                    I'll be the first to tell you all my weaknesses, but if I had to list any strengths they'd be my willingness to
+                    learn and my enthusiasm for solving problems. My hobbies include watching anime, playing videogames, working out 
+                    and as of late playing the guitar. よろしくお願いします！
                 </p>
             </div>
             <div class="right">
@@ -26,82 +21,12 @@
                         <h1 class="accent-color">Technologies</h1>
                         <div class="main-text">
                             <ul class="tech-list">
-                                <li>
+                                <li v-for="tech in techList.list" :key="tech.name">
                                     <font-awesome-icon
-                                        :icon="['fab', 'js-square']"
+                                        :icon="tech.icon"
                                         class="tech-icons accent-color"
                                     />
-                                    <p>&nbsp;&nbsp;JavaScript</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'python']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;Python</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'python']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;Django</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'react']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;React</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'vuejs']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;VueJS</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'html5']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;HTML 5</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'css3']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;CSS 5</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'java']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;Java</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'aws']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;Amazon Web Services</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fab', 'js-square']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;Next.JS</p>
-                                </li>
-                                <li>
-                                    <font-awesome-icon
-                                        :icon="['fas', 'fa-wind']"
-                                        class="tech-icons accent-color"
-                                    />
-                                    <p>&nbsp;&nbsp;TailwindCSS</p>
+                                    <p>{{tech.name}}</p>
                                 </li>
                             </ul>
                         </div>
@@ -113,7 +38,12 @@
 </template>
 
 <script>
-export default {}
+export default {
+    async asyncData({ $content, params }) {
+      const techList = await $content('technologies').fetch()
+      return { techList }
+    }
+}
 </script>
 
 <style>
@@ -125,6 +55,8 @@ h1 {
 }
 .tech-icons {
     font-size: 2rem;
+    margin-left:1rem;
+    margin-right:1rem;
 }
 .tech-list {
     list-style-type: none;
