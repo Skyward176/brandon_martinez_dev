@@ -31,7 +31,7 @@
         "webpack": "^4.46.0"
     },
     "devDependencies": {
-        "@nuxtjs/tailwindcss": "^6.4.1",
+        "@nuxtjs/tailwindcss": "^6.6.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
         "postcss": "^8.4.21",
