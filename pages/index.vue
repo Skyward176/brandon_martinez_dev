@@ -10,8 +10,7 @@
                     A second year Computer Science student and software developer. Currently focused on full-stack Web Development.
                     Proudly rocking a 3.9 GPA and currently on the market for internships or part time work.
                     My current goals are improving my React powers, becoming a better designer, and expanding my online presence.
-                    I'll be the first to tell you all my weaknesses, but if I had to list any strengths they'd be my willingness to
-                    learn and my enthusiasm for solving problems. My hobbies include watching anime, playing videogames, working out 
+                    I'm always willing to learn and am enthusiastic for solving problems. My hobbies include watching anime, playing videogames, working out 
                     and, as of late, playing the guitar.
                 </p>
             </div>
