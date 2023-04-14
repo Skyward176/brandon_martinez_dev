@@ -9,11 +9,11 @@
     },
     "devDependencies": {
         "@nuxt/content": "^2.4.3",
+        "@nuxtjs/tailwindcss": "^5.3.5",
         "autoprefixer": "^10.4.13",
-        "nuxt": "3.1",
+        "nuxt": "^3.1.0",
         "nuxt-icon": "^0.2.11",
-        "postcss": "^8.4.21",
-        "tailwindcss": "^3.2.7"
+        "nuxt-windicss": "^2.6.0"
     },
     "dependencies": {
         "@nuxtjs/eslint-config-typescript": "^12.0.0",

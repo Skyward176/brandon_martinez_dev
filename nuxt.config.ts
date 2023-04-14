@@ -32,15 +32,9 @@ export default defineNuxtConfig({
         // https://go.nuxtjs.dev/axios
         '@nuxt/content',
         'nuxt-icon',
+        'nuxt-windicss'
     ],
     // https://v3.nuxtjs.org/api/configuration/nuxt.config
-    css: ['~/assets/css/main.css'],
-    postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
-      },
-    },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
 })
