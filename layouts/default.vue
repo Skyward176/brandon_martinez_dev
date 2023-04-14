@@ -3,10 +3,12 @@
         <a-layout>
             <a-menu v-model="current" mode="horizontal" theme="dark" class="black">
                 <a-menu-item key="home">
-                    <p class="name accent-color">
-                        Brandon Martinez
-                    </p></a-menu-item
-                >
+                    <nuxt-link to="/">
+                        <p class="name accent-color">
+                            Brandon Martinez
+                        </p>
+                    </nuxt-link>
+                </a-menu-item>
                 <a-menu-item key="projects" class="navbar-items">
                     <nuxt-link to="projects"
                         ><font-awesome-icon
@@ -19,6 +21,12 @@
                     <nuxt-link to="/"
                         ><font-awesome-icon :icon="['fas', 'id-badge']" />
                         &nbsp;About Me</nuxt-link
+                    ></a-menu-item
+                >
+                <a-menu-item key="resume" class="navbar-items">
+                    <nuxt-link to="resume"
+                        ><font-awesome-icon :icon="['fas', 'file-alt']" />
+                        &nbsp;Resume</nuxt-link
                     ></a-menu-item
                 >
             </a-menu>
@@ -40,6 +48,12 @@
                                 </li>
                                 <li class="footer_item">
                                     <a href="/projects">Projects</a>
+                                </li>
+                                <li class="footer_item">
+                                    <p class="accent-color">|</p>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="/resume">Resume</a>
                                 </li>
                                 <li class="footer_item">
                                     <p>
