@@ -1,25 +1,32 @@
 <template>
-    <div className='w-full flex flex-row h-16 bg-black shadow-lg'>
-        <div className=' w-1/2 my-auto mx-2'>
-            <NuxtLink href='/'>
-                <p className='font-light font-sans text-4xl text-gray-50'>
-                    Brandon <span className='text-teal-300'>Martinez</span>
-                </p>
-            </NuxtLink>
-        </div>
-        <div className=' w-1/2 flex flex-row justify-end my-auto divide-x divide-gray-50'>
-            <NuxtLink className='flex mx-2 px-2' to="/">
-                <Icon color='white' name='ic:baseline-person' size='28' className='' />
-                <p className='font-light font-sans text-xl text-gray-50 '>
-                    About Me
-                </p>
-            </NuxtLink>
-            <NuxtLink className='flex mx-2 px-2' to="projects">
-                <Icon color='white' name='ph:git-branch-fill' size='28' className='' />
-                <p className='font-light font-sans text-xl text-gray-50'>
-                    Projects
-                </p>
-            </NuxtLink>
-        </div>
-    </div>
+  <ul className='flex flex-row p-2 content-center'>
+      <li className='flex-grow m-2' key="home">
+          <NuxtLink to="/">
+              <p className="text-4xl text-teal-500 font-light hover:underline">
+                  Brandon Martinez
+              </p>
+          </NuxtLink>
+      </li>
+      <li className="text-gray-300 m-2 text-xl font-light hover:underline" key="projects">
+          <NuxtLink to="projects">
+              <font-awesome-icon :icon="['fas', 'project-diagram']"/>
+              Projects
+          </NuxtLink>
+
+      </li>
+      <li className="text-gray-300 text-xl m-2 font-light hover:underline" key="about">
+          <NuxtLink to="/">
+              <font-awesome-icon :icon="['fas', 'id-badge']" />
+              About Me
+          </NuxtLink>
+      </li>
+      <li className="text-gray-300 text-xl m-2 content-center font-light hover:underline" key="resume">
+          <NuxtLink to="resume">
+              <font-awesome-icon :icon="['fas', 'file-alt']" />
+              <p>
+                Resume
+              </p>
+          </NuxtLink>
+      </li>
+  </ul>
 </template>

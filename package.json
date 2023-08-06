@@ -1,27 +1,20 @@
 {
-    "private": true,
-    "scripts": {
-        "build": "nuxt build",
-        "dev": "nuxt dev",
-        "generate": "nuxt generate",
-        "preview": "nuxt preview",
-        "postinstall": "nuxt prepare"
-    },
-    "devDependencies": {
-        "@nuxt/content": "^2.4.3",
-        "@nuxtjs/tailwindcss": "^5.3.5",
-        "autoprefixer": "^10.4.13",
-        "nuxt": "^3.1.0",
-        "nuxt-icon": "^0.2.11",
-        "nuxt-windicss": "^2.6.0"
-    },
-    "dependencies": {
-        "@nuxtjs/eslint-config-typescript": "^12.0.0",
-        "@typescript-eslint/parser": "^5.52.0",
-        "eslint": "^8.34.0",
-        "eslint-config-prettier": "^8.6.0",
-        "eslint-plugin-prettier": "^4.2.1",
-        "prettier": "^2.8.4",
-        "typescript": "^4.9.5"
-    }
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/content": "^2.7.2",
+    "@nuxt/devtools": "latest",
+    "@types/node": "^18.17.0",
+    "nuxt": "^3.6.5"
+  },
+  "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.8.0"
+  }
 }

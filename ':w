@@ -1,13 +1,44 @@
 <template>
     <div className="bg-black h-screen">
-        <Navbar /> 
+          <ul className='flex flex-row'>
+              <li className='flex-grow' key="home">
+                  <NuxtLink to="/">
+                      <p className="text-4xl text-teal-500">
+                          Brandon Martinez
+                      </p>
+                  </NuxtLink>
+              </li>
+              <li className="text-gray-300 text-xl w-48" key="projects">
+                  <nuxt-link to="projects"
+                      ><font-awesome-icon
+                          :icon="['fas', 'project-diagram']"
+                      />
+                      &nbsp;Projects
+                  </nuxt-link>
+
+              </li>
+              <li className="text-gray-300 text-xl w-48" key="about">
+                  <nuxt-link to="/"
+                      ><font-awesome-icon :icon="['fas', 'id-badge']" />
+                      &nbsp;About Me</nuxt-link
+                  >
+              </li>
+              <li className="text-gray-300 text-xl" key="resume">
+                  <nuxt-link to="resume"
+                      ><font-awesome-icon :icon="['fas', 'file-alt']" />
+                      &nbsp;Resume</nuxt-link
+                  >
+
+              </li>
+          </ul>
+
           <div>
-              <NuxtPage/>
+              <slot />
           </div>
 
-          <div class="dark-background footer">
-              <div>
-                  <div>
+          <a-layout-footer class="dark-background footer">
+              <a-row>
+                  <a-col>
                       <div>
                           <ul>
                               <li class="footer_item">
@@ -74,9 +105,9 @@
                               </li>
                           </ul>
                       </div>
-                  </div>
-              </div>
-          </div>
+                  </a-col>
+              </a-row>
+          </a-layout-footer>
     </div>
 </template>
 
