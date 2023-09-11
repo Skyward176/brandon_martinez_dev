@@ -5,7 +5,7 @@
         </div>
         <div className="flex flex-row">
             <div className=''>
-                {/*<Profile />*/}
+                <!--<Profile />-->
             </div>
             <div className="w-1/3 text-white text-xl">
                 <p>
@@ -35,7 +35,6 @@
         </div>
     </div>
 </template>
-
 <script setup>
     const {techList} = await useAsyncData(() => queryContent('/technologies'))
     console.log("List of techs \n" + techList);
