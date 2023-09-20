@@ -1,6 +1,0 @@
-{
-  "name":"dialedIn-api",
-  "description":"The API half of a project of mine called dialedIn. This API is build with Django REST Framework, and reuses code from my first go at creating this webapp. This time, I'm splitting it into and API and a frontend, which will be a seperate project.",
-  "url":"https://github.com/Skyward176/dialedIn-api",
-  "img":"/images/dialedIn-api.png"
-}
