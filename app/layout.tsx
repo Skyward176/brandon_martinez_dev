@@ -4,10 +4,9 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Navbar from '@/components/navbar';
+import NavbarWrapper from '@/components/navbar';
+import {Providers} from './providers';
 
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Brandon Martinez',
@@ -21,9 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
+      <body className='dark'>
+        <Providers>
+          <div className='h-screen bg-black overflow-y-scroll md:overflow-y-hidden'>
+            <NavbarWrapper/>
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   )
