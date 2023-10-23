@@ -1,0 +1,6 @@
+{
+  "name": "upLift",
+  "description": "A website for uploading, sharing, and reviewing weightlifting/workout routines. My goal is to make it easier to tell quality routines from snake oil and make strength training more accessible to beginners like myself. Built with Next, Firebase, and Tailwind as the capstone project for my associates at Brookdale Community College.",
+  "url": "https://github.com/Skyward176/UpLift",
+  "img":"/app/projects/database/images/upLift.png"
+}
