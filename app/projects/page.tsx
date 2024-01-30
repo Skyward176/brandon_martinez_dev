@@ -1,5 +1,4 @@
 import { promises as fs } from 'fs';
-import testImage from 'app/projects/database/images/upLift.png';
 import ProjectCard from './components/ProjectCard';
 async function Projects() {
 
