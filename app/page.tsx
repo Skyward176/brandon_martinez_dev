@@ -4,13 +4,13 @@ import {TbBrandPython, TbBrandDjango} from 'react-icons/tb';
 import {FaJava, FaAws} from 'react-icons/fa';
 import {FaCodeBranch } from 'react-icons/fa6';
 import {AiOutlineCode} from 'react-icons/ai';
-import Image from 'next/image';
+import CldImage from '@/components/CldImage';
 export default function Home() {
   return (
     <div className='bg-black h-full flex flex-col md:flex-row overflow-y-scroll'>
         <div className='flex w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
-          <Image
-            src='/profile.jpeg'
+          <CldImage
+            src='/portfolio/profile'
             alt='a picture of me'
             width='500'
             height='500'
@@ -24,11 +24,7 @@ export default function Home() {
           </p>
           <br/>
           <p className='text-white font-extralight text-center text-xl'> 
-            A third year Computer Science student and software developer. Currently focused on full-stack Web Development.
-            My current goals are improving my React powers, becoming a better designer, and 
-            expanding my online presence. I'm always willing to learn and am enthusiastic for solving problems. My hobbies 
-            include watching anime, playing videogames, working out and as of late, playing the guitar.
-
+            A third year Computer Science student and software developer. I'm learning C and Systems Programming right now. My hobbies right now are Overwatch and catching up on One Piece.
           </p> 
         </div>
         <div className='w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>

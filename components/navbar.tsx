@@ -19,7 +19,8 @@ function NavbarWrapper() {
           className= 'text-white md:hidden'
         />
       <NavbarBrand>
-        <p className='text-4xl text-teal-400 font-extralight text-center md:text-left'> Brandon Martinez </p>
+      <p className='text-4xl text-teal-400 font-extralight text-center hidden md:block md:text-left'> Brandon Martinez </p>
+      <p className='text-4xl text-teal-400 font-extralight text-center md:hidden'> BM </p>
       </NavbarBrand>
       <NavbarContent justify='end'>
             {pages.map((page) => (

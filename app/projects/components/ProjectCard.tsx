@@ -1,15 +1,16 @@
-import Image from 'next/image';
+import CldImage from "@/components/CldImage";
 const ProjectCard = (props) => {
 return (
-  <div>
-    <h1>{props.name}</h1>
-    <Image 
-      src='/upLift.png'
+  <div className = 'flex flex-col w-1/2 p-4 shadow-sm shadow-gray-400'>
+    <h1 className='text-4xl font-extralight text-teal-400'>{props.name}</h1>
+
+    <CldImage
+      src={props.img}
       width='500'
       height='500'
-      alt='A screenshot of this project'
+      className = 'w-full'
     />
-    <div>
+    <div className='p-4'>
       <p>{props.description}</p>
       <a href={props.url}>Check it out here!</a>
     </div>
