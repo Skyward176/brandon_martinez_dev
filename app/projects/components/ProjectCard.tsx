@@ -9,6 +9,7 @@ return (
       width='500'
       height='500'
       className = 'w-full'
+      alt= {`image of ${props.name}`}
     />
     <div className='p-4'>
       <p>{props.description}</p>
