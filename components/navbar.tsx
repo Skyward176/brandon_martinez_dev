@@ -5,8 +5,7 @@ import {usePathname} from 'next/navigation';
 const pages = [
   {name:'About Me', href:'/'}, 
   {name:'Projects', href:'/projects'},
-  {name: 'Blog', href: '/blog'},
-  {name: 'Resume', href: '/resume'}
+  {name: 'Blog', href: '/blog'}
 ];
 
 function NavbarWrapper() {
