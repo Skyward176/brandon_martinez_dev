@@ -24,7 +24,7 @@ export default function Home() {
           </p>
           <br/>
           <p className='text-white font-extralight text-center text-xl'> 
-            A third year Computer Science student and software developer. I'm learning C and Systems Programming right now. My hobbies right now are Overwatch and catching up on One Piece.
+            A third year Computer Science student and software developer. I'm learning C and Systems Programming right now. Lately, I've been really enjoying learning guitar.
           </p> 
         </div>
         <div className='w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
