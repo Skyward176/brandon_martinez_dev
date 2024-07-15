@@ -10,7 +10,7 @@ async function Projects() {
   const file2 = await fs.readFile(process.cwd() + '/app/projects/database/kantan.json', 'utf8');
   const data2 = JSON.parse(file2);
   return (
-    <div className='flex text-white p-4'>
+    <div className='flex flex-col md:flex-row text-white p-8'>
 
       <ProjectCard
         name={data1.name}
