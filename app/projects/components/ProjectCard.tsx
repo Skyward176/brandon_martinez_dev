@@ -1,14 +1,14 @@
 import CldImage from "@/components/CldImage";
 const ProjectCard = (props:{name:string, description:string, url:string, img:string}) => {
 return (
-  <div className = 'flex flex-col w-1/2 p-4 shadow-sm shadow-gray-400'>
+  <div className = 'flex flex-col w-1/3 p-4 m-auto border-solid border-1 border-gray-400'>
     <h1 className='text-4xl font-extralight text-teal-400'>{props.name}</h1>
 
     <CldImage
       src={props.img}
-      width='500'
-      height='500'
-      className = 'w-full'
+      width={400}
+      height={400}
+      className='object-contain'
       alt= {`image of ${props.name}`}
     />
     <div className='p-4'>
