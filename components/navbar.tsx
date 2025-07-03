@@ -18,7 +18,7 @@ function NavbarWrapper() {
           className= 'text-white md:hidden'
         />
       <NavbarBrand>
-      <p className='text-4xl text-teal-400 font-extralight text-center hidden md:block md:text-left'> Brandon Martinez </p>
+      <p className='text-4xl text-teal-400 font-extralight text-center hidden md:block md:text-left'> Brandon <span className="text-pink-300">Martinez</span></p>
       <p className='text-4xl text-teal-400 font-extralight text-center md:hidden'> BM </p>
       </NavbarBrand>
       <NavbarContent justify='end'>

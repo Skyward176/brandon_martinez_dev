@@ -1,32 +1,29 @@
-import { promises as fs } from 'fs';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 import ProjectCard from './components/ProjectCard';
+
+const loader = async () => { //loads projects from db
+  const docRef = await getDocs(collection(db, 'projects'));
+  const data = docRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return data;
+}
+
 async function Projects() {
+  const projects = await loader(); // get the projects from the db
 
-  //testing opening jsons
-  // this is a silly way to do this but I don't want to write a loop right now
-
-  const file1 = await fs.readFile(process.cwd() + '/app/projects/database/upLift.json', 'utf8');
-  const data1 = JSON.parse(file1);
-  const file2 = await fs.readFile(process.cwd() + '/app/projects/database/kantan.json', 'utf8');
-  const data2 = JSON.parse(file2);
   return (
     <div className='flex flex-col md:flex-row text-white p-8'>
-
-      <ProjectCard
-        name={data1.name}
-        description={data1.description}
-        url={data1.url}
-        img={data1.img}
-      />
-
-      <ProjectCard
-        name={data2.name}
-        description={data2.description}
-        url={data2.url}
-        img={data2.img}
-      />
-
+      {projects.map((project: any) => (
+        <ProjectCard
+          key={project.id}
+          name={project.name}
+          description={project.description}
+          url={project.url}
+          img={project.img}
+        />
+      ))}
     </div>
   )
 }
+
 export default Projects;

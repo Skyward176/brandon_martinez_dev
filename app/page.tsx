@@ -79,16 +79,16 @@ export default function Home() {
           <br/>
           
           {/* Search Bar */}
-          <div className='relative mb-4'>
+          <div className='relative mb-4 bg-black'>
             <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
               <FaSearch className='h-4 w-4 text-gray-400' />
             </div>
             <input
               type='text'
-              placeholder='Search technologies...'
+              placeholder='Search techs and skills...'
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className='w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent'
+              className='w-full pl-10 pr-4 py-2 bg-black border-b border-pink-300 rounded-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:rounded-lg'
             />
           </div>
 
@@ -106,16 +106,7 @@ export default function Home() {
             ) : (
               // Fallback to hardcoded list if no techs in database
               <>
-                <li className='my-2 flex flex-row justify-left items-center'> <RiJavascriptLine className='mr-2 text-2xl text-teal-400'/><p>JavaScript</p></li>
-                <li className='my-2 flex flex-row justify-left items-center'> <FaCodeBranch className='mr-2 text-2xl text-teal-400'/><p>Git</p></li>
-                <li className='my-2 flex flex-row justify-left items-center'> <RiReactjsLine className='mr-2 text-2xl text-teal-400'/>React.js </li>
-                <li className='my-2 flex flex-row justify-left items-center'> <RiTriangleFill className='mr-2 text-2xl text-teal-400'/>Next.js </li>
-                <li className='my-2 flex flex-row justify-left items-center'> <TbBrandPython className='mr-2 text-2xl text-teal-400'/>Python </li>
-                <li className='my-2 flex flex-row justify-left items-center'><TbBrandDjango className='mr-2 text-2xl text-teal-400'/>Django </li>
-                <li className='my-2 flex flex-row justify-left items-center'><RiHtml5Line className='mr-2 text-2xl text-teal-400'/>HTML 5 + CSS</li>
-                <li className='my-2 flex flex-row justify-left items-center'><FaJava className='mr-2 text-2xl text-teal-400'/>Java </li>
-                <li className='my-2 flex flex-row justify-left items-center'><AiOutlineCode className='mr-2 text-2xl text-teal-400'/>C </li>
-                <li className='my-2 flex flex-row justify-left items-center'><FaAws className='mr-2 text-2xl text-teal-400'/>AWS </li>
+                Loading . . . 
               </>
             )}
           </ul>
