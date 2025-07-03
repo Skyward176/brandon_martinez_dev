@@ -20,7 +20,7 @@
     "cloudinary-react": "^1.8.1",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.2",
-    "firebase": "^10.8.0",
+    "firebase": "^11.10.0",
     "framer-motion": "^10.16.4",
     "lodash": "^4.17.21",
     "next": "13.5.2",
