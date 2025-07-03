@@ -1,13 +1,33 @@
 // this is the about/homepage
+'use client';
 import {RiJavascriptLine, RiReactjsLine, RiTriangleFill, RiHtml5Line} from 'react-icons/ri';
 import {TbBrandPython, TbBrandDjango} from 'react-icons/tb';
 import {FaJava, FaAws} from 'react-icons/fa';
 import {FaCodeBranch } from 'react-icons/fa6';
 import {AiOutlineCode} from 'react-icons/ai';
+import {FaSearch} from 'react-icons/fa';
 import CldImage from '@/components/CldImage';
+import { useState, useEffect } from 'react';
 
 import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+
+// Icon mapping function
+const getIcon = (iconName: string) => {
+  const iconMap: { [key: string]: any } = {
+    'RiJavascriptLine': RiJavascriptLine,
+    'FaCodeBranch': FaCodeBranch,
+    'RiReactjsLine': RiReactjsLine,
+    'RiTriangleFill': RiTriangleFill,
+    'TbBrandPython': TbBrandPython,
+    'TbBrandDjango': TbBrandDjango,
+    'RiHtml5Line': RiHtml5Line,
+    'FaJava': FaJava,
+    'AiOutlineCode': AiOutlineCode,
+    'FaAws': FaAws,
+  };
+  return iconMap[iconName] || AiOutlineCode; // fallback to AiOutlineCode if icon not found
+};
 
 const loader = async () => { //loads homepage content from db
   const docRef = await getDocs(collection(db, 'homepage'));
@@ -15,14 +35,27 @@ const loader = async () => { //loads homepage content from db
   return data;
 }
 
-export default async function Home() {
-  const data = await loader(); //get the data from the db
-  const homeData = data[0]; // Get the first document from the array 
+export default function Home() {
+  const [homeData, setHomeData] = useState<any>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await loader();
+      setHomeData(data[0]);
+    };
+    fetchData();
+  }, []);
+
+  // Filter techs based on search term
+  const filteredTechs = homeData?.techs?.filter((tech: any) =>
+    tech.name.toLowerCase().includes(searchTerm.toLowerCase())
+  ).sort((a: any, b: any) => a.name.localeCompare(b.name)) || []; 
   return (
     <div className='bg-black h-full flex flex-col md:flex-row overflow-y-scroll'>
         <div className='flex w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
           <CldImage
-            src='/portfolio/profile'
+            src={homeData?.image?.src || '/portfolio/profile'}
             alt='a picture of me'
             width='500'
             height='500'
@@ -44,17 +77,47 @@ export default async function Home() {
             Techs:
           </p>
           <br/>
-          <ul className='text-xl text-white font-extralight'>
-            <li className='my-2 flex flex-row justify-left items-center'> <RiJavascriptLine className='mr-2 text-2xl text-teal-400'/><p>JavaScript</p></li>
-            <li className='my-2 flex flex-row justify-left items-center'> <FaCodeBranch className='mr-2 text-2xl text-teal-400'/><p>Git</p></li>
-            <li className='my-2 flex flex-row justify-left items-center'> <RiReactjsLine className='mr-2 text-2xl text-teal-400'/>React.js </li>
-            <li className='my-2 flex flex-row justify-left items-center'> <RiTriangleFill className='mr-2 text-2xl text-teal-400'/>Next.js </li>
-            <li className='my-2 flex flex-row justify-left items-center'> <TbBrandPython className='mr-2 text-2xl text-teal-400'/>Python </li>
-            <li className='my-2 flex flex-row justify-left items-center'><TbBrandDjango className='mr-2 text-2xl text-teal-400'/>Django </li>
-            <li className='my-2 flex flex-row justify-left items-center'><RiHtml5Line className='mr-2 text-2xl text-teal-400'/>HTML 5 + CSS</li>
-            <li className='my-2 flex flex-row justify-left items-center'><FaJava className='mr-2 text-2xl text-teal-400'/>Java </li>
-            <li className='my-2 flex flex-row justify-left items-center'><AiOutlineCode className='mr-2 text-2xl text-teal-400'/>C </li>
-            <li className='my-2 flex flex-row justify-left items-center'><FaAws className='mr-2 text-2xl text-teal-400'/>AWS </li>
+          
+          {/* Search Bar */}
+          <div className='relative mb-4'>
+            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+              <FaSearch className='h-4 w-4 text-gray-400' />
+            </div>
+            <input
+              type='text'
+              placeholder='Search technologies...'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className='w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent'
+            />
+          </div>
+
+          <ul className='text-xl text-white font-extralight max-h-80 overflow-y-auto'>
+            {filteredTechs.length > 0 ? filteredTechs.map((tech: any, index: number) => {
+              const IconComponent = getIcon(tech.icon);
+              return (
+                <li key={index} className='my-2 flex flex-row justify-left items-center'>
+                  <IconComponent className='mr-2 text-2xl text-teal-400'/>
+                  <p>{tech.name}</p>
+                </li>
+              );
+            }) : homeData?.techs ? (
+              <li className='my-2 text-gray-400 text-center'>No technologies found matching "{searchTerm}"</li>
+            ) : (
+              // Fallback to hardcoded list if no techs in database
+              <>
+                <li className='my-2 flex flex-row justify-left items-center'> <RiJavascriptLine className='mr-2 text-2xl text-teal-400'/><p>JavaScript</p></li>
+                <li className='my-2 flex flex-row justify-left items-center'> <FaCodeBranch className='mr-2 text-2xl text-teal-400'/><p>Git</p></li>
+                <li className='my-2 flex flex-row justify-left items-center'> <RiReactjsLine className='mr-2 text-2xl text-teal-400'/>React.js </li>
+                <li className='my-2 flex flex-row justify-left items-center'> <RiTriangleFill className='mr-2 text-2xl text-teal-400'/>Next.js </li>
+                <li className='my-2 flex flex-row justify-left items-center'> <TbBrandPython className='mr-2 text-2xl text-teal-400'/>Python </li>
+                <li className='my-2 flex flex-row justify-left items-center'><TbBrandDjango className='mr-2 text-2xl text-teal-400'/>Django </li>
+                <li className='my-2 flex flex-row justify-left items-center'><RiHtml5Line className='mr-2 text-2xl text-teal-400'/>HTML 5 + CSS</li>
+                <li className='my-2 flex flex-row justify-left items-center'><FaJava className='mr-2 text-2xl text-teal-400'/>Java </li>
+                <li className='my-2 flex flex-row justify-left items-center'><AiOutlineCode className='mr-2 text-2xl text-teal-400'/>C </li>
+                <li className='my-2 flex flex-row justify-left items-center'><FaAws className='mr-2 text-2xl text-teal-400'/>AWS </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
