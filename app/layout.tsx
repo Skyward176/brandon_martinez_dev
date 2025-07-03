@@ -7,7 +7,6 @@ import type { Metadata } from 'next'
 import NavbarWrapper from '@/components/navbar';
 import {Providers} from './providers';
 
-
 export const metadata: Metadata = {
   title: 'Brandon Martinez',
   description: 'My portfolio.',

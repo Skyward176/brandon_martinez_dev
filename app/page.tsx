@@ -5,7 +5,19 @@ import {FaJava, FaAws} from 'react-icons/fa';
 import {FaCodeBranch } from 'react-icons/fa6';
 import {AiOutlineCode} from 'react-icons/ai';
 import CldImage from '@/components/CldImage';
-export default function Home() {
+
+import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+
+const loader = async () => { //loads homepage content from db
+  const docRef = await getDocs(collection(db, 'homepage'));
+  const data = docRef.docs.map((doc) => doc.data());
+  return data;
+}
+
+export default async function Home() {
+  const data = await loader(); //get the data from the db
+  const homeData = data[0]; // Get the first document from the array 
   return (
     <div className='bg-black h-full flex flex-col md:flex-row overflow-y-scroll'>
         <div className='flex w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
@@ -24,7 +36,7 @@ export default function Home() {
           </p>
           <br/>
           <p className='text-white font-extralight text-center text-xl'> 
-            A third year Computer Science student and software developer. I'm learning C and Systems Programming right now. Lately, I've been really enjoying learning guitar.
+            {homeData?.about || "Loading . . ."}
           </p> 
         </div>
         <div className='w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
