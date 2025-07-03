@@ -1,18 +1,46 @@
-import { collection, getDocs } from 'firebase/firestore';
+'use client';
+
+import { useState, useEffect } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import ProjectCard from './components/ProjectCard';
 
-const loader = async () => { //loads projects from db
-  const docRef = await getDocs(collection(db, 'projects'));
-  const data = docRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  return data;
-}
+function Projects() {
+  const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-async function Projects() {
-  const projects = await loader(); // get the projects from the db
+  useEffect(() => {
+    // Set up real-time listener for projects collection
+    const unsubscribe = onSnapshot(
+      collection(db, 'projects'),
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({ 
+          id: doc.id, 
+          ...doc.data() 
+        }));
+        setProjects(data);
+        setLoading(false);
+      },
+      (error) => {
+        console.error('Error fetching projects:', error);
+        setLoading(false);
+      }
+    );
+
+    // Cleanup listener on component unmount
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className='flex flex-col md:flex-row text-white p-8'>
+        <div>Loading projects...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className='flex flex-col md:flex-row text-white p-8'>
+    <div className='flex flex-col md:flex-row text-white p-8 max-w-screen-2xl mx-auto'>
       {projects.map((project: any) => (
         <ProjectCard
           key={project.id}

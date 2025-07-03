@@ -9,7 +9,7 @@ import {FaSearch} from 'react-icons/fa';
 import CldImage from '@/components/CldImage';
 import { useState, useEffect } from 'react';
 
-import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 // Icon mapping function
@@ -29,28 +29,47 @@ const getIcon = (iconName: string) => {
   return iconMap[iconName] || AiOutlineCode; // fallback to AiOutlineCode if icon not found
 };
 
-const loader = async () => { //loads homepage content from db
-  const docRef = await getDocs(collection(db, 'homepage'));
-  const data = docRef.docs.map((doc) => doc.data());
-  return data;
-}
-
 export default function Home() {
   const [homeData, setHomeData] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await loader();
-      setHomeData(data[0]);
-    };
-    fetchData();
+    // Set up real-time listener for homepage collection
+    const unsubscribe = onSnapshot(
+      collection(db, 'homepage'),
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => doc.data());
+        if (data.length > 0) {
+          setHomeData(data[0]);
+        }
+        setLoading(false);
+      },
+      (error) => {
+        console.error('Error fetching homepage data:', error);
+        setLoading(false);
+      }
+    );
+
+    // Cleanup listener on component unmount
+    return () => unsubscribe();
   }, []);
 
   // Filter techs based on search term
   const filteredTechs = homeData?.techs?.filter((tech: any) =>
     tech.name.toLowerCase().includes(searchTerm.toLowerCase())
   ).sort((a: any, b: any) => a.name.localeCompare(b.name)) || []; 
+  
+  if (loading) {
+    return (
+      <div className='bg-black h-full flex items-center justify-center'>
+        <div className='text-white text-xl'>Loading homepage...</div>
+      </div>
+    );
+  }
+
   return (
     <div className='bg-black h-full flex flex-col md:flex-row overflow-y-scroll'>
         <div className='flex w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
@@ -95,8 +114,30 @@ export default function Home() {
           <ul className='text-xl text-white font-extralight max-h-80 overflow-y-auto'>
             {filteredTechs.length > 0 ? filteredTechs.map((tech: any, index: number) => {
               const IconComponent = getIcon(tech.icon);
+              
+              // Extract details from the tech object (excluding basic fields)
+              const excludeFields = ['icon', 'name'];
+              const techDetails = Object.entries(tech).filter(([key]) => !excludeFields.includes(key));
+              
+              const handleMouseEnter = (e: React.MouseEvent) => {
+                setHoveredTech(tech.name);
+                setMousePosition({ x: e.clientX, y: e.clientY });
+              };
+
+              const handleMouseMove = (e: React.MouseEvent) => {
+                if (hoveredTech === tech.name) {
+                  setMousePosition({ x: e.clientX, y: e.clientY });
+                }
+              };
+              
               return (
-                <li key={index} className='my-2 flex flex-row justify-left items-center'>
+                <li 
+                  key={index} 
+                  className='my-2 flex flex-row justify-left items-center relative cursor-pointer hover:bg-gray-800 hover:bg-opacity-50 rounded p-2 transition-colors'
+                  onMouseEnter={handleMouseEnter}
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={() => setHoveredTech(null)}
+                >
                   <IconComponent className='mr-2 text-2xl text-teal-400'/>
                   <p>{tech.name}</p>
                 </li>
@@ -110,6 +151,44 @@ export default function Home() {
               </>
             )}
           </ul>
+          
+          {/* Tooltip positioned under mouse cursor */}
+          {hoveredTech && (() => {
+            const tech = filteredTechs.find((t: any) => t.name === hoveredTech);
+            if (!tech) return null;
+            
+            const excludeFields = ['icon', 'name'];
+            const techDetails = Object.entries(tech).filter(([key]) => !excludeFields.includes(key));
+            
+            // Only show tooltip if there are details to display
+            if (techDetails.length === 0) return null;
+            
+            return (
+              <div 
+                className='fixed z-50 bg-gray-900 border border-gray-600 rounded-lg p-4 shadow-lg max-w-sm pointer-events-none'
+                style={{
+                  left: `${mousePosition.x + 10}px`,
+                  top: `${mousePosition.y + 10}px`,
+                }}
+              >
+                <div className='text-sm space-y-2'>
+                  {techDetails.map(([key, value]: [string, any]) => (
+                    <div key={key}>
+                      <span className='text-teal-400 font-medium capitalize'>{key.replace(/([A-Z])/g, ' $1')}: </span>
+                      <span className='text-gray-200'>
+                        {typeof value === 'object' && value !== null 
+                          ? Object.entries(value).map(([subKey, subValue]) => 
+                              `${subKey}: ${subValue}`
+                            ).join(', ')
+                          : String(value)
+                        }
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </div>
   )
