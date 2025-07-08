@@ -3,13 +3,16 @@
 
 import {NextUIProvider} from '@nextui-org/react'
 import { AuthProvider } from '@/contexts/AuthContext'
+import QueryProvider from '@/contexts/QueryProvider'
 
 export function Providers({children}: { children: React.ReactNode }) {
   return (
     <NextUIProvider>
-      <AuthProvider>
-        {children}
-      </AuthProvider>
+      <QueryProvider>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </QueryProvider>
     </NextUIProvider>
   )
 }
