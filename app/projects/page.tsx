@@ -44,11 +44,13 @@ function Projects() {
       {projects.map((project: any) => (
         <ProjectCard
           key={project.id}
+          id={project.id}
           name={project.name}
           description={project.description}
           url={project.url}
           img={project.img}
           videoUrl={project.videoUrl}
+          tags={project.tags}
         />
       ))}
     </div>

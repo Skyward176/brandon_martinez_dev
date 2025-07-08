@@ -59,7 +59,7 @@ export default function HomepageEditor() {
             value={about}
             onChange={(e) => setAbout(e.target.value)}
             rows={6}
-            className='w-full px-4 py-3 bg-black border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none'
+            className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none'
             placeholder='Write your about me content here...'
           />
         </div>
@@ -70,7 +70,7 @@ export default function HomepageEditor() {
             type='text'
             value={imageSrc}
             onChange={(e) => setImageSrc(e.target.value)}
-            className='w-full px-4 py-3 bg-black border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+            className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
             placeholder='Enter image path (e.g., /portfolio/profile)'
           />
         </div>

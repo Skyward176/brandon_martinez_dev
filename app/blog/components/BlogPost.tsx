@@ -1,3 +1,6 @@
+'use client';
+import Link from 'next/link';
+
 interface BlogPostProps {
   id: string;
   title: string;
@@ -25,12 +28,13 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
       {tags && tags.length > 0 && (
         <div className='flex flex-wrap gap-2 mb-4'>
           {tags.map((tag, index) => (
-            <span 
+            <Link 
               key={index}
-              className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full'
+              href={`/tags/${encodeURIComponent(tag)}`}
+              className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors cursor-pointer'
             >
               {tag}
-            </span>
+            </Link>
           ))}
         </div>
       )}

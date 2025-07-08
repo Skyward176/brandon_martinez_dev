@@ -1,4 +1,6 @@
+'use client';
 import CldImage from "@/components/CldImage";
+import Link from 'next/link';
 
 interface ProjectCardProps {
   name: string;
@@ -6,6 +8,8 @@ interface ProjectCardProps {
   url: string;
   img?: string;
   videoUrl?: string;
+  tags?: string[];
+  id?: string;
 }
 
 const ProjectCard = (props: ProjectCardProps) => {
@@ -54,12 +58,32 @@ const ProjectCard = (props: ProjectCardProps) => {
 
   return (
     <div className='flex flex-col w-full md:w-1/3 p-6 my-4 mx-2 border-solid border-1 border-gray-400 rounded-lg'>
-      <h1 className='text-2xl md:text-3xl lg:text-4xl font-extralight text-teal-400 mb-4 break-words leading-tight'>{props.name}</h1>
-      
-      {renderMedia()}
-      
-      <div className=''>
+      <div className='cursor-pointer' onClick={() => props.id && window.open(`/projects/${props.id}`, '_blank')}>
+        <h1 className='text-2xl md:text-3xl lg:text-4xl font-extralight text-teal-400 mb-4 break-words leading-tight hover:text-teal-300 transition-colors'>
+          {props.name}
+        </h1>
+        
+        {renderMedia()}
+        
         <p className='mb-3'>{props.description}</p>
+      </div>
+      
+      {/* Tags */}
+      {props.tags && props.tags.length > 0 && (
+        <div className='flex flex-wrap gap-2 mb-4'>
+          {props.tags.map((tag, index) => (
+            <Link 
+              key={index}
+              href={`/tags/${encodeURIComponent(tag)}`}
+              className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors'
+            >
+              {tag}
+            </Link>
+          ))}
+        </div>
+      )}
+      
+      <div className='mt-auto'>
         <a href={props.url} className='text-teal-400 hover:text-teal-300 transition-colors'>
           Check it out here!
         </a>
