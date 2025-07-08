@@ -11,6 +11,7 @@ export interface Tech {
     experience?: string;
     comfortLevel?: string;
   };
+  description?: string;
   summary?: string;
 }
 

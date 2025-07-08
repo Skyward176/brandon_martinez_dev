@@ -20,6 +20,11 @@ const loadProjectDetails = async (projectId: string) => {
   
   const project: any = { id: projectDoc.id, ...projectDoc.data() };
   
+  // Load all tags for name resolution
+  let tags: any[] = [];
+  const tagsQuery = await getDocs(collection(db, 'tags'));
+  tags = tagsQuery.docs.map(doc => ({ id: doc.id, name: doc.data().name }));
+  
   // Load related blog posts if project has tags
   let relatedPosts: any[] = [];
   if (project.tags && project.tags.length > 0) {
@@ -28,10 +33,19 @@ const loadProjectDetails = async (projectId: string) => {
       where('tags', 'array-contains-any', project.tags)
     );
     const blogDocs = await getDocs(blogQuery);
-    relatedPosts = blogDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    relatedPosts = blogDocs.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        // Convert Firestore Timestamp to plain object
+        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
+        updatedAt: data.updatedAt?.toDate ? data.updatedAt.toDate() : data.updatedAt,
+      };
+    });
   }
   
-  return { project, relatedPosts };
+  return { project, relatedPosts, tags };
 };
 
 // Function to extract YouTube video ID from URL
@@ -48,7 +62,7 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
     notFound();
   }
   
-  const { project, relatedPosts } = result;
+  const { project, relatedPosts, tags } = result;
 
   const renderMedia = () => {
     if (project.videoUrl) {
@@ -123,15 +137,18 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
         {/* Tags */}
         {project.tags && project.tags.length > 0 && (
           <div className='flex flex-wrap gap-3 justify-center mb-8'>
-            {project.tags.map((tag: string, index: number) => (
-              <Link 
-                key={index}
-                href={`/tags/${encodeURIComponent(tag)}`}
-                className='px-4 py-2 bg-pink-300 text-black rounded-full hover:bg-pink-400 transition-colors'
-              >
-                {tag}
-              </Link>
-            ))}
+            {project.tags.map((tagId: string, index: number) => {
+              const tag = tags.find(t => t.id === tagId);
+              return tag ? (
+                <Link 
+                  key={index}
+                  href={`/tags/${encodeURIComponent(tag.name)}`}
+                  className='px-4 py-2 bg-pink-300 text-black rounded-full hover:bg-pink-400 transition-colors'
+                >
+                  {tag.name}
+                </Link>
+              ) : null;
+            })}
           </div>
         )}
 

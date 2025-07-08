@@ -25,22 +25,26 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
   };
 
   return (
-    <article className='bg-gray-900 rounded-lg p-6 border border-gray-700'>
-      <h2 className='text-3xl font-extralight text-teal-400 mb-3'>{title}</h2>
-      <p className='text-gray-400 text-sm mb-4'>{formatDate(createdAt)}</p>
+    <Link href={`/blog/${id}`} className='block'>
+      <article className='bg-gray-900 rounded-lg p-6 border border-gray-700 hover:border-teal-400 transition-all duration-300 cursor-pointer group'>
+        <h2 className='text-3xl font-extralight text-teal-400 mb-3 group-hover:text-teal-300 transition-colors'>{title}</h2>
+        <p className='text-gray-400 text-sm mb-4'>{formatDate(createdAt)}</p>
       
       {tags && tags.length > 0 && (
         <div className='flex flex-wrap gap-2 mb-4'>
           {tags.map((tagId, index) => {
             const tag = allTags.find(t => t.id === tagId);
             return tag ? (
-              <Link 
+              <span 
                 key={index}
-                href={`/tags/${encodeURIComponent(tag.name)}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.location.href = `/tags/${encodeURIComponent(tag.name)}`;
+                }}
                 className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors cursor-pointer'
               >
                 {tag.name}
-              </Link>
+              </span>
             ) : null;
           })}
         </div>
@@ -50,6 +54,7 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
         {content}
       </div>
     </article>
+    </Link>
   )
 }
 

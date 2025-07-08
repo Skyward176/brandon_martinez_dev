@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className='dark'>
         <Providers>
-          <div className='h-screen bg-black overflow-y-scroll md:overflow-y-hidden'>
+          <div className='h-screen bg-black overflow-y-scroll'>
             <NavbarWrapper/>
             {children}
           </div>

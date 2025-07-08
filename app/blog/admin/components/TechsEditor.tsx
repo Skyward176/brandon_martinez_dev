@@ -48,6 +48,7 @@ export default function TechsEditor() {
     icon: '', 
     experience: '', 
     comfortLevel: '',
+    description: '',
     summary: ''
   });
   const [editingTech, setEditingTech] = useState<Tech | null>(null);
@@ -117,7 +118,7 @@ export default function TechsEditor() {
   };
 
   const resetForm = () => {
-    setNewTech({ name: '', icon: '', experience: '', comfortLevel: '', summary: '' });
+    setNewTech({ name: '', icon: '', experience: '', comfortLevel: '', description: '', summary: '' });
     setSelectedTags([]);
     setEditingTech(null);
     setIconSearch('');
@@ -144,6 +145,11 @@ export default function TechsEditor() {
         if (newTech.comfortLevel) {
           techData.stats.comfortLevel = newTech.comfortLevel;
         }
+      }
+
+      // Add description if it has a value
+      if (newTech.description && newTech.description.trim()) {
+        techData.description = newTech.description.trim();
       }
 
       // Add summary if it has a value
@@ -183,6 +189,7 @@ export default function TechsEditor() {
       icon: tech.icon,
       experience: tech.stats?.experience || '',
       comfortLevel: tech.stats?.comfortLevel || '',
+      description: tech.description || '',
       summary: tech.summary || ''
     });
     setSelectedTags(tech.tags || []);
@@ -361,13 +368,24 @@ export default function TechsEditor() {
             </div>
 
             <div>
+              <label className='block text-white mb-2 font-medium'>Brief Description</label>
+              <textarea
+                value={newTech.description}
+                onChange={(e) => setNewTech({ ...newTech, description: e.target.value })}
+                rows={3}
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-vertical'
+                placeholder='Enter a brief description of this technology (displayed on the tech page)...'
+              />
+            </div>
+
+            <div>
               <label className='block text-white mb-2 font-medium'>Summary</label>
               <textarea
                 value={newTech.summary}
                 onChange={(e) => setNewTech({ ...newTech, summary: e.target.value })}
                 rows={4}
                 className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-vertical'
-                placeholder='Enter a brief summary or description of this technology...'
+                placeholder='Enter a detailed summary or description of this technology...'
               />
             </div>
 
@@ -418,6 +436,9 @@ export default function TechsEditor() {
                       <div>
                         <h4 className='text-white font-medium text-lg'>{tech.name}</h4>
                         <p className='text-gray-400 text-sm'>Icon: {tech.icon}</p>
+                        {tech.description && (
+                          <p className='text-gray-300 text-sm mt-1 italic'>{tech.description}</p>
+                        )}
                         {tech.stats && (
                           <div className='text-sm text-gray-400 mt-1'>
                             {tech.stats.experience && (
