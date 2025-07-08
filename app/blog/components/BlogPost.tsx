@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useTags } from '@/hooks/useQueries';
 
 interface BlogPostProps {
-  id: string;
+  id?: string;
   title: string;
   content: string;
   createdAt: any;
