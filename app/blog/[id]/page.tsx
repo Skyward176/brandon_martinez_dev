@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <div className='bg-black min-h-screen text-white p-8'>
+    <div className='bg-black text-white p-8 h-full overflow-auto'>
       <div className='max-w-4xl mx-auto'>
         {/* Navigation */}
         <div className='mb-8'>

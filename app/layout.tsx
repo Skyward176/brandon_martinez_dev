@@ -19,11 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='dark'>
+      <body className='dark bg-black h-screen overflow-hidden'>
         <Providers>
-          <div className='h-screen bg-black overflow-y-scroll'>
-            <NavbarWrapper/>
-            {children}
+          <div className='h-screen flex flex-col'>
+            <NavbarWrapper />
+            <div className='flex-1 bg-black overflow-hidden'>
+              {children}
+            </div>
           </div>
         </Providers>
       </body>

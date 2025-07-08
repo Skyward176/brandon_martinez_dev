@@ -4,6 +4,7 @@ import {FaSearch} from 'react-icons/fa';
 import CldImage from '@/components/CldImage';
 import TechItem from '@/components/TechItem';
 import { useState, useEffect } from 'react';
+import { useIdentity } from '@/contexts/IdentityContext';
 
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
@@ -25,6 +26,7 @@ export default function Home() {
   const [techs, setTechs] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [tagMap, setTagMap] = useState<Map<string, string>>(new Map());
+  const { getName, isIris, isIrisDomain } = useIdentity();
   
   useEffect(() => {
     const fetchData = async () => {
@@ -59,30 +61,27 @@ export default function Home() {
     });
     return nameMatch || tagMatch;
   }).sort((a: any, b: any) => a.name.localeCompare(b.name)) || []; 
-  return (
-    <div className='bg-black h-full flex flex-col md:flex-row overflow-y-scroll'>
-        <div className='flex w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
-          <CldImage
-            src={homeData?.image?.src || '/portfolio/profile'}
-            alt='a picture of me'
-            width='500'
-            height='500'
-            className='rounded-md '
-          /> 
-        </div>
 
-        <div className='w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
+  // Replace references to Brandon Martinez with current identity
+  const processText = (text: string) => {
+    if (!text) return text;
+    
+    // First replace full name references
+    let processedText = text.replace(/Brandon Martinez/gi, getName());
+    
+    // Then replace standalone "Brandon" with "Iris" when in Iris mode
+    if (isIris) {
+      processedText = processedText.replace(/\bBrandon\b/gi, 'Iris');
+    }
+    
+    return processedText;
+  };
+
+  return (
+    <div className='bg-black flex flex-col md:flex-row h-full'>
+        <div className='w-100% p-4 mx-16 md:mx-auto my-auto mt-24 md:w-1/3 h-full'>
           <p className='text-center text-teal-400 text-4xl'>
-            About Me
-          </p>
-          <br/>
-          <p className='text-white font-extralight text-center text-xl'> 
-            {homeData?.about || "Loading . . ."}
-          </p> 
-        </div>
-        <div className='w-100% p-4 mx-16 md:mx-auto my-auto md:w-1/3'>
-          <p className='text-center text-teal-400 text-4xl'>
-            Techs:
+            Stuff I Know:
           </p>
           <br/>
           
@@ -100,7 +99,7 @@ export default function Home() {
             />
           </div>
 
-          <ul className='text-xl text-white font-extralight max-h-80 overflow-y-auto'>
+          <ul className='text-xl text-white font-extralight h-full pb-16 overflow-auto'>
             {filteredTechs.length > 0 ? filteredTechs.map((tech: any, index: number) => (
               <TechItem key={index} tech={tech} />
             )) : homeData?.techs ? (
@@ -112,6 +111,30 @@ export default function Home() {
               </>
             )}
           </ul>
+        </div>
+        <div className='w-100% p-4 mt-24 mx-16 md:mx-auto my-auto md:w-1/3 h-full'>
+          <p className='text-center text-teal-400 text-4xl'>
+            About Me
+          </p>
+          <br/>
+          <p className='text-white font-extralight text-center text-xl'> 
+            {processText(homeData?.about) || "Loading . . ."}
+          </p> 
+        </div>
+        <div className="mt-24 flex flex-col w-1/3">
+            <p className='text-center text-teal-400 text-4xl'>
+              Look, it's me!
+            </p>
+            <br/>
+            <div className="relative w-[300px] h-[400px] mx-auto">
+            <CldImage
+              src={homeData?.image?.src || '/portfolio/profile'}
+              alt='a picture of me'
+              fill
+              sizes="(max-width: 400px) 90vw, (max-width: 600px) 70vw, 300px"
+              className="rounded-md object-cover"
+            />
+            </div>
         </div>
       </div>
   )

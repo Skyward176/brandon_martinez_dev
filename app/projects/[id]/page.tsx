@@ -103,7 +103,7 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
   };
 
   return (
-    <div className='bg-black min-h-screen text-white'>
+    <div className='bg-black text-white h-full overflow-auto'>
       <div className='max-w-6xl mx-auto p-8'>
         {/* Back Button */}
         <Link 

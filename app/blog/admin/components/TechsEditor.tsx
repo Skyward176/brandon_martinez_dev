@@ -48,7 +48,6 @@ export default function TechsEditor() {
     icon: '', 
     experience: '', 
     comfortLevel: '',
-    description: '',
     summary: ''
   });
   const [editingTech, setEditingTech] = useState<Tech | null>(null);
@@ -118,7 +117,7 @@ export default function TechsEditor() {
   };
 
   const resetForm = () => {
-    setNewTech({ name: '', icon: '', experience: '', comfortLevel: '', description: '', summary: '' });
+    setNewTech({ name: '', icon: '', experience: '', comfortLevel: '', summary: '' });
     setSelectedTags([]);
     setEditingTech(null);
     setIconSearch('');
@@ -145,11 +144,6 @@ export default function TechsEditor() {
         if (newTech.comfortLevel) {
           techData.stats.comfortLevel = newTech.comfortLevel;
         }
-      }
-
-      // Add description if it has a value
-      if (newTech.description && newTech.description.trim()) {
-        techData.description = newTech.description.trim();
       }
 
       // Add summary if it has a value
@@ -189,7 +183,6 @@ export default function TechsEditor() {
       icon: tech.icon,
       experience: tech.stats?.experience || '',
       comfortLevel: tech.stats?.comfortLevel || '',
-      description: tech.description || '',
       summary: tech.summary || ''
     });
     setSelectedTags(tech.tags || []);
@@ -368,17 +361,6 @@ export default function TechsEditor() {
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Brief Description</label>
-              <textarea
-                value={newTech.description}
-                onChange={(e) => setNewTech({ ...newTech, description: e.target.value })}
-                rows={3}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-vertical'
-                placeholder='Enter a brief description of this technology (displayed on the tech page)...'
-              />
-            </div>
-
-            <div>
               <label className='block text-white mb-2 font-medium'>Summary</label>
               <textarea
                 value={newTech.summary}
@@ -425,7 +407,7 @@ export default function TechsEditor() {
         <div>
           <h3 className='text-xl font-extralight text-teal-400 mb-6'>Current Technologies</h3>
           
-          <div className='space-y-4 max-h-96 overflow-y-auto'>
+          <div className='space-y-4 overflow-y-auto'>
             {techs.map(tech => {
               const IconComponent = getIconComponent(tech.icon);
               return (

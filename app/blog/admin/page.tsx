@@ -19,7 +19,7 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <div className='bg-black min-h-screen flex items-center justify-center'>
+      <div className='bg-black h-full flex items-center justify-center'>
         <div className='text-white text-xl'>Loading...</div>
       </div>
     );
@@ -31,7 +31,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className='bg-black min-h-screen'>
+    <div className='bg-black h-full'>
       <AdminDashboard />
     </div>
   );

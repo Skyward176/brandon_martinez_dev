@@ -37,7 +37,7 @@ export default async function TagPage({ params }: TagPageProps) {
   const decodedTag = decodeURIComponent(params.tag);
 
   return (
-    <div className='bg-black min-h-screen text-white p-8'>
+    <div className='bg-black text-white p-8 h-full overflow-auto'>
       <div className='max-w-6xl mx-auto'>
         <div className='text-center mb-8'>
           <h1 className='text-5xl font-extralight text-teal-400 mb-4'>

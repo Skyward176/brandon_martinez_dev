@@ -30,14 +30,14 @@ export default function LoginPage() {
 
   if (loading) {
     return (
-      <div className='bg-black min-h-screen flex items-center justify-center'>
+      <div className='bg-black h-full flex items-center justify-center'>
         <div className='text-white text-xl'>Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className='bg-black min-h-screen flex items-center justify-center'>
+    <div className='bg-black h-full flex items-center justify-center'>
       <div className='bg-transparent p-8 rounded-lg border border-gray-700 w-full max-w-md'>
         <div className='flex items-center justify-center mb-6'>
           <HiLockClosed className='text-teal-400 text-3xl mr-2' />

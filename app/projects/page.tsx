@@ -40,7 +40,7 @@ function Projects() {
   }
 
   return (
-    <div className='flex flex-col md:flex-row text-white p-8 max-w-screen-2xl mx-auto'>
+    <div className='flex flex-col md:flex-row text-white p-8 max-w-screen-2xl mx-auto h-full'>
       {projects.map((project: any) => (
         <ProjectCard
           key={project.id}

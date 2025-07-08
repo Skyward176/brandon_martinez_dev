@@ -118,8 +118,8 @@ export default async function TechPage({ params }: TechPageProps) {
   const decodedTechName = decodeURIComponent(params.tech);
 
   return (
-    <div className='bg-black min-h-screen text-white p-8 overflow-scroll'>
-      <div className='max-w-6xl mx-auto'>
+    <div className='bg-black text-white p-8 h-full'>
+      <div className='max-w-6xl mx-auto h-full'>
         {/* Tech Header */}
         <div className='text-center mb-12'>
           <div className='flex items-center justify-center mb-6'>
