@@ -1,6 +1,7 @@
 'use client';
 import CldImage from "@/components/CldImage";
 import Link from 'next/link';
+import { useTags } from '@/hooks/useQueries';
 
 interface ProjectCardProps {
   name: string;
@@ -13,6 +14,9 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = (props: ProjectCardProps) => {
+  // Fetch tags to resolve IDs to names
+  const { data: allTags = [] } = useTags();
+  
   // Function to extract YouTube video ID from URL
   const getYouTubeVideoId = (url: string) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -71,15 +75,18 @@ const ProjectCard = (props: ProjectCardProps) => {
       {/* Tags */}
       {props.tags && props.tags.length > 0 && (
         <div className='flex flex-wrap gap-2 mb-4'>
-          {props.tags.map((tag, index) => (
-            <Link 
-              key={index}
-              href={`/tags/${encodeURIComponent(tag)}`}
-              className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors'
-            >
-              {tag}
-            </Link>
-          ))}
+          {props.tags.map((tagId, index) => {
+            const tag = allTags.find(t => t.id === tagId);
+            return tag ? (
+              <Link 
+                key={index}
+                href={`/tags/${encodeURIComponent(tag.name)}`}
+                className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors'
+              >
+                {tag.name}
+              </Link>
+            ) : null;
+          })}
         </div>
       )}
       
