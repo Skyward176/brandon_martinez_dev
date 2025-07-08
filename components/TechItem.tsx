@@ -111,7 +111,7 @@ export default function TechItem({ tech }: TechItemProps) {
   return (
     <li className='my-2 group relative'>
       <Link 
-        href={`/tags/${encodeURIComponent(tech.name)}`}
+        href={`/techs/${encodeURIComponent(tech.name)}`}
         className='block'
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

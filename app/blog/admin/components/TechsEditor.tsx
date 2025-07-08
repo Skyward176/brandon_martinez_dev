@@ -47,7 +47,8 @@ export default function TechsEditor() {
     name: '', 
     icon: '', 
     experience: '', 
-    comfortLevel: '' 
+    comfortLevel: '',
+    summary: ''
   });
   const [editingTech, setEditingTech] = useState<Tech | null>(null);
   const [message, setMessage] = useState('');
@@ -116,7 +117,7 @@ export default function TechsEditor() {
   };
 
   const resetForm = () => {
-    setNewTech({ name: '', icon: '', experience: '', comfortLevel: '' });
+    setNewTech({ name: '', icon: '', experience: '', comfortLevel: '', summary: '' });
     setSelectedTags([]);
     setEditingTech(null);
     setIconSearch('');
@@ -143,6 +144,11 @@ export default function TechsEditor() {
         if (newTech.comfortLevel) {
           techData.stats.comfortLevel = newTech.comfortLevel;
         }
+      }
+
+      // Add summary if it has a value
+      if (newTech.summary && newTech.summary.trim()) {
+        techData.summary = newTech.summary.trim();
       }
 
       if (editingTech) {
@@ -176,7 +182,8 @@ export default function TechsEditor() {
       name: tech.name,
       icon: tech.icon,
       experience: tech.stats?.experience || '',
-      comfortLevel: tech.stats?.comfortLevel || ''
+      comfortLevel: tech.stats?.comfortLevel || '',
+      summary: tech.summary || ''
     });
     setSelectedTags(tech.tags || []);
     setIconSearch('');
@@ -351,6 +358,17 @@ export default function TechsEditor() {
                 <option value='Confident' className='bg-gray-800'>Confident</option>
                 <option value='Highly Proficient' className='bg-gray-800'>Highly Proficient</option>
               </select>
+            </div>
+
+            <div>
+              <label className='block text-white mb-2 font-medium'>Summary</label>
+              <textarea
+                value={newTech.summary}
+                onChange={(e) => setNewTech({ ...newTech, summary: e.target.value })}
+                rows={4}
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-vertical'
+                placeholder='Enter a brief summary or description of this technology...'
+              />
             </div>
 
             <div className='flex gap-3'>

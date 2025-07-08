@@ -11,6 +11,7 @@ export interface Tech {
     experience?: string;
     comfortLevel?: string;
   };
+  summary?: string;
 }
 
 export interface Tag {
@@ -71,14 +72,36 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   })) as BlogPost[];
 };
 
+// Helper function to ensure tag exists
+const ensureTagExists = async (tagName: string) => {
+  const tagsRef = await getDocs(collection(db, 'tags'));
+  const existingTag = tagsRef.docs.find(doc => doc.data().name === tagName);
+  
+  if (!existingTag) {
+    // Create the tag if it doesn't exist
+    await addDoc(collection(db, 'tags'), { name: tagName });
+  }
+};
+
 // Mutation functions
 export const createTech = async (techData: Omit<Tech, 'id'>) => {
+  // Create the tech document
   const docRef = await addDoc(collection(db, 'techs'), techData);
+  
+  // Ensure a tag with the same name exists
+  await ensureTagExists(techData.name);
+  
   return { id: docRef.id, ...techData };
 };
 
 export const updateTech = async (techId: string, techData: Partial<Tech>) => {
   await updateDoc(doc(db, 'techs', techId), techData);
+  
+  // If the name is being updated, ensure a tag with the new name exists
+  if (techData.name) {
+    await ensureTagExists(techData.name);
+  }
+  
   return { id: techId, ...techData };
 };
 
