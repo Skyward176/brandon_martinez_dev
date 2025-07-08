@@ -1,8 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { collection, doc, updateDoc, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import Link from 'next/link';
+import { useTechs, useTags, useCreateTech, useUpdateTech, useDeleteTech } from '@/hooks/useQueries';
+import { Tech } from '@/lib/api';
 // Import major icon categories from react-icons
 import * as Ai from 'react-icons/ai';
 import * as Bi from 'react-icons/bi';
@@ -27,17 +27,6 @@ import * as Tb from 'react-icons/tb';
 import * as Ti from 'react-icons/ti';
 import * as Wi from 'react-icons/wi';
 
-interface Tech {
-  id?: string;
-  name: string;
-  icon: string;
-  tags: string[];
-  stats?: {
-    experience?: string;
-    comfortLevel?: string;
-  };
-}
-
 interface IconOption {
   name: string;
   component: React.ComponentType;
@@ -45,8 +34,14 @@ interface IconOption {
 }
 
 export default function TechsEditor() {
-  const [techs, setTechs] = useState<Tech[]>([]);
-  const [availableTags, setAvailableTags] = useState<{id: string, name: string}[]>([]);
+  // React Query hooks
+  const { data: techs = [], isLoading: techsLoading, error: techsError } = useTechs();
+  const { data: availableTags = [], isLoading: tagsLoading } = useTags();
+  const createTechMutation = useCreateTech();
+  const updateTechMutation = useUpdateTech();
+  const deleteTechMutation = useDeleteTech();
+
+  // Local state
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [newTech, setNewTech] = useState({ 
     name: '', 
@@ -55,7 +50,6 @@ export default function TechsEditor() {
     comfortLevel: '' 
   });
   const [editingTech, setEditingTech] = useState<Tech | null>(null);
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   
   // Icon search functionality
@@ -90,8 +84,6 @@ export default function TechsEditor() {
   };
 
   useEffect(() => {
-    loadTechs();
-    loadAvailableTags();
     loadAvailableIcons();
   }, []);
 
@@ -123,32 +115,6 @@ export default function TechsEditor() {
     setAvailableIcons(icons);
   };
 
-  const loadTechs = async () => {
-    try {
-      const docRef = await getDocs(collection(db, 'techs'));
-      const data = docRef.docs.map((doc) => ({ 
-        id: doc.id, 
-        ...doc.data() 
-      })) as Tech[];
-      setTechs(data);
-    } catch (error: any) {
-      setMessage('Error loading techs: ' + error.message);
-    }
-  };
-
-  const loadAvailableTags = async () => {
-    try {
-      const tagsRef = await getDocs(collection(db, 'tags'));
-      const tagsData = tagsRef.docs.map(doc => ({
-        id: doc.id,
-        name: doc.data().name
-      }));
-      setAvailableTags(tagsData.sort((a, b) => a.name.localeCompare(b.name)));
-    } catch (error: any) {
-      console.error('Error loading tags:', error);
-    }
-  };
-
   const resetForm = () => {
     setNewTech({ name: '', icon: '', experience: '', comfortLevel: '' });
     setSelectedTags([]);
@@ -160,9 +126,6 @@ export default function TechsEditor() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTech.name || !newTech.icon) return;
-
-    setLoading(true);
-    setMessage('');
 
     try {
       const techData: any = {
@@ -183,36 +146,27 @@ export default function TechsEditor() {
       }
 
       if (editingTech) {
-        await updateDoc(doc(db, 'techs', editingTech.id!), techData);
+        await updateTechMutation.mutateAsync({ id: editingTech.id!, data: techData });
         setMessage('Technology updated successfully!');
       } else {
-        await addDoc(collection(db, 'techs'), techData);
+        await createTechMutation.mutateAsync(techData);
         setMessage('Technology added successfully!');
       }
 
       resetForm();
-      loadTechs();
-      await updateHomepageTechs();
     } catch (error: any) {
       setMessage('Error saving technology: ' + error.message);
-    } finally {
-      setLoading(false);
     }
   };
 
-  const updateHomepageTechs = async () => {
-    try {
-      const techsRef = await getDocs(collection(db, 'techs'));
-      const techsData = techsRef.docs.map(doc => doc.data());
-      
-      const homepageRef = await getDocs(collection(db, 'homepage'));
-      if (homepageRef.docs.length > 0) {
-        await updateDoc(doc(db, 'homepage', homepageRef.docs[0].id), {
-          techs: techsData
-        });
+  const handleDelete = async (techId: string) => {
+    if (confirm('Are you sure you want to delete this technology?')) {
+      try {
+        await deleteTechMutation.mutateAsync(techId);
+        setMessage('Technology deleted successfully!');
+      } catch (error: any) {
+        setMessage('Error deleting technology: ' + error.message);
       }
-    } catch (error: any) {
-      console.error('Error updating homepage techs:', error);
     }
   };
 
@@ -227,19 +181,6 @@ export default function TechsEditor() {
     setSelectedTags(tech.tags || []);
     setIconSearch('');
     setIsIconDropdownOpen(false);
-  };
-
-  const handleDelete = async (techId: string) => {
-    if (confirm('Are you sure you want to delete this technology?')) {
-      try {
-        await deleteDoc(doc(db, 'techs', techId));
-        setMessage('Technology deleted successfully!');
-        loadTechs();
-        await updateHomepageTechs();
-      } catch (error: any) {
-        setMessage('Error deleting technology: ' + error.message);
-      }
-    }
   };
 
   const toggleTag = (tagId: string) => {
@@ -359,8 +300,8 @@ export default function TechsEditor() {
                     <label key={tag.id} className='flex items-center cursor-pointer'>
                       <input
                         type='checkbox'
-                        checked={selectedTags.includes(tag.id)}
-                        onChange={() => toggleTag(tag.id)}
+                        checked={selectedTags.includes(tag.id!)}
+                        onChange={() => toggleTag(tag.id!)}
                         className='mr-2 text-teal-400 focus:ring-teal-400'
                       />
                       <span className='text-white text-sm'>{tag.name}</span>
@@ -415,10 +356,10 @@ export default function TechsEditor() {
             <div className='flex gap-3'>
               <button
                 type='submit'
-                disabled={loading}
+                disabled={createTechMutation.isPending || updateTechMutation.isPending}
                 className='flex-1 py-3 bg-teal-400 text-black font-medium rounded-lg hover:bg-teal-300 transition-colors disabled:opacity-50'
               >
-                {loading ? 'Saving...' : (editingTech ? 'Update Technology' : 'Add Technology')}
+                {(createTechMutation.isPending || updateTechMutation.isPending) ? 'Saving...' : (editingTech ? 'Update Technology' : 'Add Technology')}
               </button>
               
               {editingTech && (

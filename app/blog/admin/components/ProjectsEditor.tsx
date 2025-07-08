@@ -1,25 +1,20 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { collection, doc, updateDoc, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import React, { useState } from 'react';
+import { useProjects, useTags, useCreateProject, useUpdateProject, useDeleteProject } from '@/hooks/useQueries';
+import { Project } from '@/lib/api';
 import Link from 'next/link';
 import CldImage from "@/components/CldImage";
 import { HiCheck } from 'react-icons/hi2';
 
-interface Project {
-  id?: string;
-  name: string;
-  description: string;
-  url: string;
-  img?: string;
-  videoUrl?: string;
-  article?: string;
-  tags: string[];
-}
-
 export default function ProjectsEditor() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [availableTags, setAvailableTags] = useState<{id: string, name: string}[]>([]);
+  // React Query hooks
+  const { data: projects = [], isLoading: projectsLoading, error: projectsError } = useProjects();
+  const { data: availableTags = [], isLoading: tagsLoading } = useTags();
+  const createProjectMutation = useCreateProject();
+  const updateProjectMutation = useUpdateProject();
+  const deleteProjectMutation = useDeleteProject();
+
+  // Local state
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [newProject, setNewProject] = useState({
     name: '',
@@ -30,40 +25,7 @@ export default function ProjectsEditor() {
     article: ''
   });
   const [editingProject, setEditingProject] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    loadProjects();
-    loadAvailableTags();
-  }, []);
-
-  const loadProjects = async () => {
-    try {
-      const docRef = await getDocs(collection(db, 'projects'));
-      const data = docRef.docs.map((doc) => ({ 
-        id: doc.id, 
-        ...doc.data() 
-      })) as Project[];
-      setProjects(data);
-    } catch (error: any) {
-      setMessage('Error loading projects: ' + error.message);
-    }
-  };
-
-  const loadAvailableTags = async () => {
-    try {
-      const tagsRef = await getDocs(collection(db, 'tags'));
-      const tagsData = tagsRef.docs.map(doc => ({
-        id: doc.id,
-        name: doc.data().name
-      }));
-      setAvailableTags(tagsData.sort((a, b) => a.name.localeCompare(b.name)));
-    } catch (error: any) {
-      console.error('Error loading tags:', error);
-    }
-  };
-
   const resetForm = () => {
     setNewProject({
       name: '',
@@ -81,7 +43,6 @@ export default function ProjectsEditor() {
     e.preventDefault();
     if (!newProject.name || !newProject.description || !newProject.url) return;
 
-    setLoading(true);
     setMessage('');
 
     try {
@@ -104,19 +65,16 @@ export default function ProjectsEditor() {
       }
 
       if (editingProject) {
-        await updateDoc(doc(db, 'projects', editingProject.id!), projectData);
+        await updateProjectMutation.mutateAsync({ id: editingProject.id!, data: projectData });
         setMessage('Project updated successfully!');
       } else {
-        await addDoc(collection(db, 'projects'), projectData);
+        await createProjectMutation.mutateAsync(projectData);
         setMessage('Project added successfully!');
       }
 
       resetForm();
-      loadProjects();
     } catch (error: any) {
       setMessage('Error saving project: ' + error.message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -136,9 +94,8 @@ export default function ProjectsEditor() {
   const handleDelete = async (projectId: string) => {
     if (confirm('Are you sure you want to delete this project?')) {
       try {
-        await deleteDoc(doc(db, 'projects', projectId));
+        await deleteProjectMutation.mutateAsync(projectId);
         setMessage('Project deleted successfully!');
-        loadProjects();
       } catch (error: any) {
         setMessage('Error deleting project: ' + error.message);
       }
@@ -320,8 +277,8 @@ export default function ProjectsEditor() {
                     <label key={tag.id} className='flex items-center cursor-pointer'>
                       <input
                         type='checkbox'
-                        checked={selectedTags.includes(tag.id)}
-                        onChange={() => toggleTag(tag.id)}
+                        checked={selectedTags.includes(tag.id!)}
+                        onChange={() => toggleTag(tag.id!)}
                         className='mr-2 text-teal-400 focus:ring-teal-400'
                       />
                       <span className='text-white text-sm'>{tag.name}</span>
@@ -346,10 +303,10 @@ export default function ProjectsEditor() {
             <div className='flex gap-3'>
               <button
                 type='submit'
-                disabled={loading}
+                disabled={createProjectMutation.isPending || updateProjectMutation.isPending}
                 className='flex-1 py-3 bg-teal-400 text-black font-medium rounded-lg hover:bg-teal-300 transition-colors disabled:opacity-50'
               >
-                {loading ? 'Saving...' : (editingProject ? 'Update Project' : 'Add Project')}
+                {(createProjectMutation.isPending || updateProjectMutation.isPending) ? 'Saving...' : (editingProject ? 'Update Project' : 'Add Project')}
               </button>
               
               {editingProject && (
