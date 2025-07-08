@@ -1,38 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { useBlogPosts } from '@/hooks/useQueries';
 import BlogPost from "./components/BlogPost";
 
 function Blog() {
-  const [blogPosts, setBlogPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: blogPosts = [], isLoading, error } = useBlogPosts();
 
-  useEffect(() => {
-    // Set up real-time listener for blog collection with ordering
-    const q = query(collection(db, 'blog'), orderBy('createdAt', 'desc'));
-    const unsubscribe = onSnapshot(
-      q,
-      (snapshot) => {
-        const data = snapshot.docs.map((doc) => ({ 
-          id: doc.id, 
-          ...doc.data() 
-        }));
-        setBlogPosts(data);
-        setLoading(false);
-      },
-      (error) => {
-        console.error('Error fetching blog posts:', error);
-        setLoading(false);
-      }
-    );
-
-    // Cleanup listener on component unmount
-    return () => unsubscribe();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className='bg-black min-h-screen text-white p-8'>
         <div className='max-w-4xl mx-auto'>
@@ -45,14 +19,37 @@ function Blog() {
     );
   }
 
+  if (error) {
+    return (
+      <div className='bg-black min-h-screen text-white p-8'>
+        <div className='max-w-4xl mx-auto'>
+          <h1 className='text-5xl font-extralight text-teal-400 text-center mb-8'>Blog</h1>
+          <div className='text-center text-red-400 mt-16'>
+            <p className='text-xl'>Error loading blog posts. Please try again later.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Sort posts by creation date (newest first)
+  const sortedPosts = [...blogPosts].sort((a, b) => {
+    if (a.createdAt && b.createdAt) {
+      const aTime = a.createdAt.seconds ? a.createdAt.seconds : new Date(a.createdAt).getTime() / 1000;
+      const bTime = b.createdAt.seconds ? b.createdAt.seconds : new Date(b.createdAt).getTime() / 1000;
+      return bTime - aTime;
+    }
+    return 0;
+  });
+
   return (
-    <div className='bg-black min-h-screen text-white p-8'>
+    <div className='bg-black max-h-screen text-white p-8 pb-16 overflow-auto'>
       <div className='max-w-4xl mx-auto'>
         <h1 className='text-5xl font-extralight text-teal-400 text-center mb-8'>Blog</h1>
         
-        {blogPosts.length > 0 ? (
-          <div className='space-y-8'>
-            {blogPosts.map((post: any) => (
+        {sortedPosts.length > 0 ? (
+          <div className='space-y-8 pb-8'>
+            {sortedPosts.map((post) => (
               <BlogPost
                 key={post.id}
                 id={post.id}

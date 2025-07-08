@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useTags } from '@/hooks/useQueries';
 
 interface BlogPostProps {
   id: string;
@@ -10,6 +11,9 @@ interface BlogPostProps {
 }
 
 function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
+  // Fetch tags to resolve IDs to names
+  const { data: allTags = [] } = useTags();
+  
   const formatDate = (timestamp: any) => {
     if (!timestamp) return '';
     const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
@@ -27,15 +31,18 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
       
       {tags && tags.length > 0 && (
         <div className='flex flex-wrap gap-2 mb-4'>
-          {tags.map((tag, index) => (
-            <Link 
-              key={index}
-              href={`/tags/${encodeURIComponent(tag)}`}
-              className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors cursor-pointer'
-            >
-              {tag}
-            </Link>
-          ))}
+          {tags.map((tagId, index) => {
+            const tag = allTags.find(t => t.id === tagId);
+            return tag ? (
+              <Link 
+                key={index}
+                href={`/tags/${encodeURIComponent(tag.name)}`}
+                className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors cursor-pointer'
+              >
+                {tag.name}
+              </Link>
+            ) : null;
+          })}
         </div>
       )}
       

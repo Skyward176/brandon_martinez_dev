@@ -64,7 +64,7 @@ export const fetchProjects = async (): Promise<Project[]> => {
 };
 
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
-  const postsRef = await getDocs(collection(db, 'posts'));
+  const postsRef = await getDocs(collection(db, 'blog'));
   return postsRef.docs.map(doc => ({ 
     id: doc.id, 
     ...doc.data() 
@@ -103,17 +103,17 @@ export const deleteProject = async (projectId: string) => {
 };
 
 export const createBlogPost = async (postData: Omit<BlogPost, 'id'>) => {
-  const docRef = await addDoc(collection(db, 'posts'), postData);
+  const docRef = await addDoc(collection(db, 'blog'), postData);
   return { id: docRef.id, ...postData };
 };
 
 export const updateBlogPost = async (postId: string, postData: Partial<BlogPost>) => {
-  await updateDoc(doc(db, 'posts', postId), postData);
+  await updateDoc(doc(db, 'blog', postId), postData);
   return { id: postId, ...postData };
 };
 
 export const deleteBlogPost = async (postId: string) => {
-  await deleteDoc(doc(db, 'posts', postId));
+  await deleteDoc(doc(db, 'blog', postId));
   return postId;
 };
 
