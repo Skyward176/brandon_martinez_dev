@@ -48,6 +48,7 @@ function Projects() {
           description={project.description}
           url={project.url}
           img={project.img}
+          videoUrl={project.videoUrl}
         />
       ))}
     </div>
