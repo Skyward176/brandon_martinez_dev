@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import CldImage from '@/components/CldImage';
 import BlogPost from '@/app/blog/components/BlogPost';
+import { FaGithub } from 'react-icons/fa';
 
 interface ProjectDetailProps {
   params: {
@@ -108,7 +109,7 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
         {/* Back Button */}
         <Link 
           href="/projects" 
-          className='inline-flex items-center text-teal-400 hover:text-teal-300 mb-8 transition-colors'
+          className='inline-flex items-center text-gray-300 hover:text-teal-300 mb-8 transition-colors'
         >
           ← Back to Projects
         </Link>
@@ -119,16 +120,23 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
           <p className='text-xl text-gray-300 mb-6'>{project.description}</p>
           
           {/* External Link */}
-          {project.url && (
-            <a 
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className='inline-block px-6 py-3 bg-teal-400 text-black font-medium rounded-lg hover:bg-teal-300 transition-colors'
-            >
-              View Live Project
-            </a>
-          )}
+            {project.url && (
+            <div className="flex justify-center">
+              <div
+              className='px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-teal-300 hover:text-black hover:scale-105 transition-colors flex w-96 justify-center'
+              >
+              <FaGithub className="inline-block mr-2 text-3xl" />
+              <a 
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-2xl"
+              >
+                View Project on GitHub
+              </a>
+              </div>
+            </div>
+            )}
         </div>
 
         {/* Media */}
@@ -143,7 +151,7 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
                 <Link 
                   key={index}
                   href={`/tags/${encodeURIComponent(tag.name)}`}
-                  className='px-4 py-2 bg-pink-300 text-black rounded-full hover:bg-pink-400 transition-colors'
+                  className='px-4 py-2 border-1 border-pink-300 text-lg text-white rounded-full transition-all duration-300 hover:text-black hover:font-medium hover:bg-pink-400 hover:scale-105 ml-3 duration:300'
                 >
                   {tag.name}
                 </Link>

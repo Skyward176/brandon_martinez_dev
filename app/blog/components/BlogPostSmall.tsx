@@ -29,9 +29,9 @@ function BlogPostSmall({ id, title, content, createdAt, tags }: BlogPostSmallPro
 
   return (
     <Link href={`/blog/${id}`} className='block'>
-      <div className='bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-teal-400 transition-all duration-300 cursor-pointer group'>
+      <div className='bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-teal-400 transition-all duration-500 ease-in-out cursor-pointer group transform hover:scale-[1.02] hover:shadow-lg'>
         <div className='flex items-start justify-between mb-2'>
-          <h3 className='text-white font-medium text-lg group-hover:text-teal-400 transition-colors flex-1 mr-4'>
+          <h3 className='text-white font-medium text-lg group-hover:text-teal-400 transition-colors duration-300 ease-in-out flex-1 mr-4'>
             {title}
           </h3>
           <span className='text-gray-400 text-sm flex-shrink-0'>
@@ -56,7 +56,7 @@ function BlogPostSmall({ id, title, content, createdAt, tags }: BlogPostSmallPro
               return tag ? (
                 <span 
                   key={index}
-                  className='px-2 py-1 bg-pink-300 text-black text-xs rounded-full'
+                  className='px-2 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-all duration-300 ease-in-out transform hover:scale-105'
                 >
                   {tag.name}
                 </span>

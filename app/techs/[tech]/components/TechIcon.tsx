@@ -48,9 +48,9 @@ export default function TechIcon({ iconName, techName, className = '' }: TechIco
   const IconComponent = getIcon(iconName);
   
   return (
-    <div className={`bg-teal-400 rounded-lg flex items-center justify-center ${className}`}>
+    <div className={`bg-teal-400 rounded-lg flex items-center justify-center hover:bg-teal-300 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg ${className}`}>
       {React.createElement(IconComponent, { 
-        className: 'text-black',
+        className: 'text-black transition-transform duration-300 ease-in-out',
         size: 64
       })}
     </div>

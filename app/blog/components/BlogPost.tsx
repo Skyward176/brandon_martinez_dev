@@ -26,8 +26,8 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
 
   return (
     <Link href={`/blog/${id}`} className='block'>
-      <article className='bg-gray-900 rounded-lg p-6 border border-gray-700 hover:border-teal-400 transition-all duration-300 cursor-pointer group'>
-        <h2 className='text-3xl font-extralight text-teal-400 mb-3 group-hover:text-teal-300 transition-colors'>{title}</h2>
+      <article className='bg-black rounded-lg p-6 border border-gray-700 hover:border-teal-400 transition-all duration-500 ease-in-out cursor-pointer group hover:bg-opacity-60 hover:backdrop-blur-md transform hover:scale-[1.02]'>
+        <h2 className='text-3xl font-extralight text-teal-400 mb-3 group-hover:text-teal-300 transition-colors duration-300 ease-in-out'>{title}</h2>
         <p className='text-gray-400 text-sm mb-4'>{formatDate(createdAt)}</p>
       
       {tags && tags.length > 0 && (
@@ -41,7 +41,7 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
                   e.stopPropagation();
                   window.location.href = `/tags/${encodeURIComponent(tag.name)}`;
                 }}
-                className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors cursor-pointer'
+                className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-all duration-300 ease-in-out cursor-pointer transform hover:scale-105 hover:shadow-lg'
               >
                 {tag.name}
               </span>

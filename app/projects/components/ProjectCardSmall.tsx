@@ -18,7 +18,7 @@ const ProjectCardSmall = (props: ProjectCardSmallProps) => {
 
   return (
     <Link href={`/projects/${props.id}`} className='block'>
-      <div className='bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-teal-400 transition-all duration-300 cursor-pointer group'>
+      <div className='bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-teal-400 transition-all duration-500 ease-in-out cursor-pointer group transform hover:scale-[1.02] hover:shadow-lg'>
         <div className='flex items-start gap-4'>
           {/* Project Image/Video Thumbnail */}
           {props.img && (
@@ -26,14 +26,14 @@ const ProjectCardSmall = (props: ProjectCardSmallProps) => {
               <img 
                 src={props.img} 
                 alt={props.name}
-                className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+                className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out'
               />
             </div>
           )}
           
           {/* Project Info */}
           <div className='flex-1 min-w-0'>
-            <h3 className='text-white font-medium text-lg mb-1 group-hover:text-teal-400 transition-colors truncate'>
+            <h3 className='text-white font-medium text-lg mb-1 group-hover:text-teal-400 transition-colors duration-300 ease-in-out truncate'>
               {props.name}
             </h3>
             <p className='text-gray-400 text-sm mb-2' style={{
@@ -53,7 +53,7 @@ const ProjectCardSmall = (props: ProjectCardSmallProps) => {
                   return tag ? (
                     <span 
                       key={index}
-                      className='px-2 py-1 bg-pink-300 text-black text-xs rounded-full'
+                      className='px-2 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-all duration-300 ease-in-out transform hover:scale-105'
                     >
                       {tag.name}
                     </span>

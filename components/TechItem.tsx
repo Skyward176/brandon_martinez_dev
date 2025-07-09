@@ -118,23 +118,23 @@ export default function TechItem({ tech }: TechItemProps) {
         onMouseMove={handleMouseMove}
       >
         <div className='flex flex-row justify-left items-center p-3 rounded-lg cursor-pointer border border-transparent transition-all duration-300 group-hover:border-gray-600'>
-          {React.createElement(IconComponent as any, { className: 'mr-3 text-2xl text-teal-400 transition-all duration-300 group-hover:text-teal-300 group-hover:scale-110' })}
-          <div className='flex-1'>
-            <p className='text-white font-medium transition-colors duration-300 group-hover:text-teal-300'>
-              {tech.name}
-            </p>
-            {tagNames.length > 0 && (
-              <div className='flex flex-wrap gap-1 mt-2'>
-                {tagNames.map((tagName: string, tagIndex: number) => (
+          {React.createElement(IconComponent as any, { className: 'mr-3 text-4xl text-teal-400 transition-all duration-300 group-hover:text-pink-300 group-hover:scale-110' })}
+          <div className='flex w-full'>
+            <div className="flex items-center flex-wrap gap-1">
+              <p className='text-white font-medium transition-colors duration-300 group-hover:text-teal-300'>
+                {tech.name}
+              </p>
+              {tagNames.length > 0 && (
+                tagNames.map((tagName: string, tagIndex: number) => (
                   <span 
                     key={tagIndex}
-                    className='px-2 py-1 bg-pink-300 text-black text-xs rounded-full transition-all duration-300 group-hover:bg-pink-400 group-hover:scale-105'
+                    className='px-2 py-1 border-1 border-pink-300 text-white text-xs rounded-full transition-all duration-300 group-hover:text-black group-hover:font-medium group-hover:bg-pink-400 group-hover:scale-105 ml-3'
                   >
                     {tagName}
                   </span>
-                ))}
-              </div>
-            )}
+                ))
+              )}
+            </div>
           </div>
         </div>
         

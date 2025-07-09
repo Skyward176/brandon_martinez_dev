@@ -61,9 +61,9 @@ const ProjectCard = (props: ProjectCardProps) => {
   };
 
   return (
-    <div className='flex flex-col w-full md:w-1/3 p-6 my-4 mx-2 border-solid border-1 border-gray-400 rounded-lg'>
+    <div className='flex flex-col w-full md:w-1/3 p-6 my-4 mx-2 border-solid border-1 border-gray-400 rounded-lg hover:border-teal-400 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg'>
       <div className='cursor-pointer' onClick={() => props.id && window.open(`/projects/${props.id}`, '_blank')}>
-        <h1 className='text-2xl md:text-3xl lg:text-4xl font-extralight text-teal-400 mb-4 break-words leading-tight hover:text-teal-300 transition-colors'>
+        <h1 className='text-2xl md:text-3xl lg:text-4xl font-extralight text-teal-400 mb-4 break-words leading-tight hover:text-teal-300 transition-colors duration-300 ease-in-out'>
           {props.name}
         </h1>
         
@@ -81,7 +81,7 @@ const ProjectCard = (props: ProjectCardProps) => {
               <Link 
                 key={index}
                 href={`/tags/${encodeURIComponent(tag.name)}`}
-                className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-colors'
+                className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-all duration-300 ease-in-out transform hover:scale-105'
               >
                 {tag.name}
               </Link>
@@ -91,7 +91,7 @@ const ProjectCard = (props: ProjectCardProps) => {
       )}
       
       <div className='mt-auto'>
-        <a href={props.url} className='text-teal-400 hover:text-teal-300 transition-colors'>
+        <a href={props.url} className='text-teal-400 hover:text-teal-300 transition-colors duration-300 ease-in-out'>
           Check it out here!
         </a>
       </div>

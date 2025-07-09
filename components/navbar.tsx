@@ -100,7 +100,7 @@ function NavbarWrapper() {
               <NavbarItem key={page.name}>
                 <Link 
                   href={page.href} 
-                  className={`hover:underline font-extralight text-xl focus:text-teal-400 transition-all duration-300 ${
+                  className={`hover:underline font-extralight text-xl focus:text-teal-400 transition-all duration-300 ease-in-out ${
                     pathname === page.href ? 'text-teal-400' : 'text-white/90 hover:text-white'
                   }`}>
                   {page.name}
@@ -115,14 +115,14 @@ function NavbarWrapper() {
                   <div className="flex items-center gap-3">
                     <Link 
                       href="/blog/admin" 
-                      className={`hover:underline font-extralight text-xl focus:text-teal-400 transition-all duration-300 ${
+                      className={`hover:underline font-extralight text-xl focus:text-teal-400 transition-all duration-300 ease-in-out ${
                         pathname === '/blog/admin' ? 'text-teal-400' : 'text-white/90 hover:text-white'
                       }`}>
                       Admin
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="hover:underline font-extralight text-xl focus:text-pink-400 transition-all duration-300 text-pink-400 hover:text-pink-300 bg-transparent border-none cursor-pointer flex items-center gap-2"
+                      className="hover:underline font-extralight text-xl focus:text-pink-400 transition-all duration-300 ease-in-out text-pink-400 hover:text-pink-300 bg-transparent border-none cursor-pointer flex items-center gap-2"
                     >
                       <HiArrowRightOnRectangle />
                       Logout
@@ -163,7 +163,7 @@ function NavbarWrapper() {
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="font-extralight text-xl focus:text-pink-400 transition-all duration-300 text-pink-400 hover:text-pink-300 bg-transparent border-none cursor-pointer flex items-center gap-2 justify-start p-0"
+                    className="font-extralight text-xl focus:text-pink-400 transition-all duration-300 ease-in-out text-pink-400 hover:text-pink-300 bg-transparent border-none cursor-pointer flex items-center gap-2 justify-start p-0"
                   >
                     <HiArrowRightOnRectangle />
                     Logout
@@ -200,7 +200,7 @@ function NavbarWrapper() {
               <div className="flex gap-2">
                 <Button
                   type="submit"
-                  className="bg-teal-400 text-black hover:bg-teal-300 transition-colors"
+                  className="bg-teal-400 text-black hover:bg-teal-300 transition-all duration-300 ease-in-out transform hover:scale-105"
                 >
                   Enter
                 </Button>
@@ -208,7 +208,7 @@ function NavbarWrapper() {
                   type="button"
                   onClick={handlePasswordCancel}
                   variant="ghost"
-                  className="text-gray-400 hover:text-white"
+                  className="text-gray-400 hover:text-white transition-all duration-300 ease-in-out"
                 >
                   Cancel
                 </Button>
