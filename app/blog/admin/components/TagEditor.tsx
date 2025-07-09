@@ -75,7 +75,7 @@ export default function TagEditor() {
     setEditName('');
   };
 
-  if (tagsLoading) return <div className="text-white">Loading tags...</div>;
+  if (tagsLoading) return <div className="text-gray-100">Loading tags...</div>;
   if (tagsError) return <div className="text-red-400">Error loading tags</div>;
 
   return (
@@ -88,12 +88,12 @@ export default function TagEditor() {
           
           <form onSubmit={handleAddTag} className="space-y-4">
             <div>
-              <label className="block text-white mb-2 font-medium">Tag Name</label>
+              <label className="block text-gray-100 mb-2 font-medium">Tag Name</label>
               <input
                 type="text"
                 value={newTag}
                 onChange={(e) => setNewTag(e.target.value)}
-                className="w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
+                className="w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
                 placeholder="Enter tag name..."
                 required
               />
@@ -132,7 +132,7 @@ export default function TagEditor() {
                       type="text"
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
-                      className="w-full px-3 py-2 bg-transparent border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
+                      className="w-full px-3 py-2 bg-transparent border border-gray-600 rounded text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
                       required
                     />
                     <div className="flex gap-2">
@@ -146,7 +146,7 @@ export default function TagEditor() {
                       <button
                         type="button"
                         onClick={cancelEdit}
-                        className="px-3 py-1 bg-gray-600 text-white text-sm rounded hover:bg-gray-500 transition-colors"
+                        className="px-3 py-1 bg-gray-600 text-gray-100 text-sm rounded hover:bg-gray-500 transition-colors"
                       >
                         Cancel
                       </button>
@@ -154,7 +154,7 @@ export default function TagEditor() {
                   </form>
                 ) : (
                   <div className="flex items-center justify-between">
-                    <span className="text-white font-medium">{tag.name}</span>
+                    <span className="text-gray-100 font-medium">{tag.name}</span>
                     <div className="flex gap-2">
                       <button
                         onClick={() => startEdit(tag)}

@@ -1,6 +1,7 @@
 'use client'
 import * as React from 'react';
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Button} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Button} from "@nextui-org/react";
+import Link from '@/components/Link'
 import {usePathname} from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { useIdentity } from '@/contexts/IdentityContext';
@@ -77,7 +78,7 @@ function NavbarWrapper() {
     >
       <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className= 'text-white md:hidden'
+          className= 'text-gray-100 md:hidden'
         />      <NavbarBrand>
         <div 
           className={`select-none ${isIrisDomain ? '' : 'cursor-pointer'}`}
@@ -99,10 +100,10 @@ function NavbarWrapper() {
             {pages.map((page) => (
               <NavbarItem key={page.name}>
                 <Link 
-                  href={page.href} 
-                  className={`hover:underline font-extralight text-xl focus:text-teal-400 transition-all duration-300 ease-in-out ${
-                    pathname === page.href ? 'text-teal-400' : 'text-white/90 hover:text-white'
-                  }`}>
+                  href={page.href}
+                  size='large'
+                  active={pathname === page.href}
+                >
                   {page.name}
                 </Link>
               </NavbarItem>
@@ -115,9 +116,9 @@ function NavbarWrapper() {
                   <div className="flex items-center gap-3">
                     <Link 
                       href="/blog/admin" 
-                      className={`hover:underline font-extralight text-xl focus:text-teal-400 transition-all duration-300 ease-in-out ${
-                        pathname === '/blog/admin' ? 'text-teal-400' : 'text-white/90 hover:text-white'
-                      }`}>
+                      active={pathname === '/blog/admin'}
+                      size='large'
+                    >
                       Admin
                     </Link>
                     <button
@@ -139,10 +140,8 @@ function NavbarWrapper() {
             <NavbarMenuItem key={`${page}-${index}`}>
               <Link 
                 href={page.href} 
-                className={`font-extralight text-xl w-full focus:text-teal-400 transition-all duration-300 ${
-                  pathname === page.href ? 'text-teal-400' : 'text-white/90 hover:text-white'
-                }`}
-                size='lg'
+                active={pathname === page.href}
+                size='large'
               >
                 {page.name}
               </Link>
@@ -156,9 +155,8 @@ function NavbarWrapper() {
                 <div className="flex flex-col gap-3">
                   <Link 
                     href="/blog/admin" 
-                    className={`font-extralight text-xl focus:text-teal-400 transition-all duration-300 ${
-                      pathname === '/blog/admin' ? 'text-teal-400' : 'text-white/90 hover:text-white'
-                    }`}>
+                    active={pathname === '/blog/admin'}
+                  >
                     Admin
                   </Link>
                   <button
@@ -172,9 +170,8 @@ function NavbarWrapper() {
               ) : (
                 <Link 
                   href="/login" 
-                  className={`font-extralight text-xl flex items-center gap-2 focus:text-teal-400 transition-all duration-300 ${
-                    pathname === '/login' ? 'text-teal-400' : 'text-white/90 hover:text-white'
-                  }`}>
+                  active={pathname === '/login'}
+                >
                   <HiUser className="text-lg" />
                   Login
                 </Link>
@@ -188,12 +185,12 @@ function NavbarWrapper() {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-gray-900 p-6 rounded-lg border border-gray-700 max-w-sm w-full mx-4">
             <form onSubmit={handlePasswordSubmit}>
-              <p className="text-white text-lg mb-4">Enter the secret password:</p>
+              <p className="text-gray-100 text-lg mb-4">Enter the secret password:</p>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-2 bg-black border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-teal-400 mb-4"
+                className="w-full px-3 py-2 bg-black border border-gray-600 rounded text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 mb-4"
                 placeholder="Password..."
                 autoFocus
               />
@@ -208,7 +205,7 @@ function NavbarWrapper() {
                   type="button"
                   onClick={handlePasswordCancel}
                   variant="ghost"
-                  className="text-gray-400 hover:text-white transition-all duration-300 ease-in-out"
+                  className="text-gray-400 hover:text-gray-100 transition-all duration-300 ease-in-out"
                 >
                   Cancel
                 </Button>

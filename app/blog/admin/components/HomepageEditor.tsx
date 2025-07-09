@@ -54,23 +54,23 @@ export default function HomepageEditor() {
       
       <div className='space-y-6'>
         <div>
-          <label className='block text-white mb-2 font-medium'>About Me Text</label>
+          <label className='block text-gray-100 mb-2 font-medium'>About Me Text</label>
           <textarea
             value={about}
             onChange={(e) => setAbout(e.target.value)}
             rows={6}
-            className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none'
+            className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none'
             placeholder='Write your about me content here...'
           />
         </div>
 
         <div>
-          <label className='block text-white mb-2 font-medium'>Profile Image Source</label>
+          <label className='block text-gray-100 mb-2 font-medium'>Profile Image Source</label>
           <input
             type='text'
             value={imageSrc}
             onChange={(e) => setImageSrc(e.target.value)}
-            className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+            className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
             placeholder='Enter image path (e.g., /portfolio/profile)'
           />
         </div>

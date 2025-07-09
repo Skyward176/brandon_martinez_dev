@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import CldImage from '@/components/CldImage';
 import BlogPost from '@/app/blog/components/BlogPost';
-import { FaGithub } from 'react-icons/fa';
+import ViewOnGithub from '@/app/projects/components/ViewOnGithub';
 
 interface ProjectDetailProps {
   params: {
@@ -104,7 +104,7 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
   };
 
   return (
-    <div className='bg-black text-white h-full overflow-auto'>
+    <div className='bg-black text-gray-100 h-full overflow-auto'>
       <div className='max-w-6xl mx-auto p-8'>
         {/* Back Button */}
         <Link 
@@ -121,21 +121,7 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
           
           {/* External Link */}
             {project.url && (
-            <div className="flex justify-center">
-              <div
-              className='px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-teal-300 hover:text-black hover:scale-105 transition-colors flex w-96 justify-center'
-              >
-              <FaGithub className="inline-block mr-2 text-3xl" />
-              <a 
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-2xl"
-              >
-                View Project on GitHub
-              </a>
-              </div>
-            </div>
+            <ViewOnGithub url={project.url} />
             )}
         </div>
 
@@ -151,7 +137,7 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
                 <Link 
                   key={index}
                   href={`/tags/${encodeURIComponent(tag.name)}`}
-                  className='px-4 py-2 border-1 border-pink-300 text-lg text-white rounded-full transition-all duration-300 hover:text-black hover:font-medium hover:bg-pink-400 hover:scale-105 ml-3 duration:300'
+                  className='px-4 py-2 border-1 border-pink-300 text-lg text-gray-100 rounded-full transition-all duration-300 hover:text-black hover:font-medium hover:bg-pink-400 hover:scale-105 ml-3 duration:300'
                 >
                   {tag.name}
                 </Link>
@@ -165,7 +151,7 @@ export default async function ProjectDetail({ params }: ProjectDetailProps) {
           <div className='max-w-4xl mx-auto mb-12'>
             <h2 className='text-3xl font-extralight text-teal-400 mb-6'>About This Project</h2>
             <div className='bg-gray-900 rounded-lg p-8 border border-gray-700'>
-              <div className='text-white leading-relaxed whitespace-pre-wrap'>
+              <div className='text-gray-100 leading-relaxed whitespace-pre-wrap'>
                 {project.article}
               </div>
             </div>

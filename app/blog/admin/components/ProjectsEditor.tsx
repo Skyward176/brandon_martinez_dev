@@ -124,7 +124,7 @@ export default function ProjectsEditor() {
 
     return (
       <div className='mt-6 p-4 bg-transparent border border-gray-600 rounded-lg'>
-        <h4 className='text-white font-medium mb-3'>Preview</h4>
+        <h4 className='text-gray-100 font-medium mb-3'>Preview</h4>
         <div className='bg-transparent border border-gray-500 rounded-lg p-4'>
           {newProject.videoUrl && (
             <div className='w-full aspect-video mb-4'>
@@ -160,7 +160,7 @@ export default function ProjectsEditor() {
             />
           )}
           
-          <h3 className='text-white font-bold text-xl mb-2'>{newProject.name}</h3>
+          <h3 className='text-gray-100 font-bold text-xl mb-2'>{newProject.name}</h3>
           <p className='text-gray-300 mb-3'>{newProject.description}</p>
           
           {selectedTags.length > 0 && (
@@ -201,23 +201,23 @@ export default function ProjectsEditor() {
           
           <form onSubmit={handleSubmit} className='space-y-6'>
             <div>
-              <label className='block text-white mb-2 font-medium'>Project Name</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Project Name</label>
               <input
                 type='text'
                 value={newProject.name}
                 onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
                 placeholder='Enter project name...'
                 required
               />
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Description</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Description</label>
               <textarea
                 value={newProject.description}
                 onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
                 placeholder='Enter project description...'
                 rows={3}
                 required
@@ -225,52 +225,52 @@ export default function ProjectsEditor() {
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Project URL</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Project URL</label>
               <input
                 type='url'
                 value={newProject.url}
                 onChange={(e) => setNewProject({ ...newProject, url: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
                 placeholder='https://github.com/username/project'
                 required
               />
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Image URL (optional)</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Image URL (optional)</label>
               <input
                 type='text'
                 value={newProject.img}
                 onChange={(e) => setNewProject({ ...newProject, img: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
                 placeholder='Enter image URL or Cloudinary path...'
               />
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Video URL (optional)</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Video URL (optional)</label>
               <input
                 type='url'
                 value={newProject.videoUrl}
                 onChange={(e) => setNewProject({ ...newProject, videoUrl: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
                 placeholder='https://www.youtube.com/watch?v=...'
               />
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Detailed Article (optional)</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Detailed Article (optional)</label>
               <textarea
                 value={newProject.article}
                 onChange={(e) => setNewProject({ ...newProject, article: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
                 placeholder='Enter detailed article content (supports Markdown)...'
                 rows={6}
               />
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Tags</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Tags</label>
               <div className='bg-transparent border border-gray-600 rounded-lg p-3 max-h-40 overflow-y-auto'>
                 <div className='grid grid-cols-2 gap-2'>
                   {availableTags.map(tag => (
@@ -281,7 +281,7 @@ export default function ProjectsEditor() {
                         onChange={() => toggleTag(tag.id!)}
                         className='mr-2 text-teal-400 focus:ring-teal-400'
                       />
-                      <span className='text-white text-sm'>{tag.name}</span>
+                      <span className='text-gray-100 text-sm'>{tag.name}</span>
                     </label>
                   ))}
                 </div>
@@ -313,7 +313,7 @@ export default function ProjectsEditor() {
                 <button
                   type='button'
                   onClick={resetForm}
-                  className='px-6 py-3 bg-transparent border border-gray-600 text-white font-medium rounded-lg hover:border-gray-500 transition-colors'
+                  className='px-6 py-3 bg-transparent border border-gray-600 text-gray-100 font-medium rounded-lg hover:border-gray-500 transition-colors'
                 >
                   Cancel
                 </button>
@@ -343,7 +343,7 @@ export default function ProjectsEditor() {
               <div key={project.id} className='bg-transparent border border-gray-600 rounded-lg p-4'>
                 <div className='flex items-start justify-between mb-2'>
                   <div className='flex-1'>
-                    <h4 className='text-white font-medium text-lg'>{project.name}</h4>
+                    <h4 className='text-gray-100 font-medium text-lg'>{project.name}</h4>
                     <p className='text-gray-400 text-sm mb-2'>{project.description}</p>
                     <div className='flex flex-wrap gap-2 text-xs text-gray-500'>
                       <span>URL: {project.url}</span>

@@ -92,7 +92,7 @@ export default function BlogEditor() {
     );
   };
 
-  if (postsLoading) return <div className="text-white">Loading posts...</div>;
+  if (postsLoading) return <div className="text-gray-100">Loading posts...</div>;
   if (postsError) return <div className="text-red-400">Error loading posts</div>;
 
   return (
@@ -107,31 +107,31 @@ export default function BlogEditor() {
           
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-white mb-2 font-medium">Title</label>
+              <label className="block text-gray-100 mb-2 font-medium">Title</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
+                className="w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
                 placeholder="Enter post title..."
                 required
               />
             </div>
 
             <div>
-              <label className="block text-white mb-2 font-medium">Content</label>
+              <label className="block text-gray-100 mb-2 font-medium">Content</label>
               <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 rows={10}
-                className="w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-vertical"
+                className="w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-vertical"
                 placeholder="Enter post content (Markdown supported)..."
                 required
               />
             </div>
 
             <div>
-              <label className="block text-white mb-2 font-medium">Tags</label>
+              <label className="block text-gray-100 mb-2 font-medium">Tags</label>
               <div className="bg-transparent border border-gray-600 rounded-lg p-3 max-h-40 overflow-y-auto">
                 <div className="grid grid-cols-2 gap-2">
                   {availableTags.map(tag => (
@@ -142,7 +142,7 @@ export default function BlogEditor() {
                         onChange={() => toggleTag(tag.id!)}
                         className="mr-2 text-teal-400 focus:ring-teal-400"
                       />
-                      <span className="text-white text-sm">{tag.name}</span>
+                      <span className="text-gray-100 text-sm">{tag.name}</span>
                     </label>
                   ))}
                 </div>
@@ -174,7 +174,7 @@ export default function BlogEditor() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="px-6 py-3 bg-transparent border border-gray-600 text-white font-medium rounded-lg hover:border-gray-500 transition-colors"
+                  className="px-6 py-3 bg-transparent border border-gray-600 text-gray-100 font-medium rounded-lg hover:border-gray-500 transition-colors"
                 >
                   Cancel
                 </button>
@@ -202,7 +202,7 @@ export default function BlogEditor() {
               <div key={post.id} className="bg-transparent border border-gray-600 rounded-lg p-4">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex-1">
-                    <h4 className="text-white font-medium text-lg">{post.title}</h4>
+                    <h4 className="text-gray-100 font-medium text-lg">{post.title}</h4>
                     <p className="text-gray-400 text-sm mt-1 line-clamp-2">{post.content}</p>
                     <div className="text-xs text-gray-500 mt-2">
                       Created: {post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown'}

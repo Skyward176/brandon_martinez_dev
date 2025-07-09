@@ -234,19 +234,19 @@ export default function TechsEditor() {
           
           <form onSubmit={handleSubmit} className='space-y-6'>
             <div>
-              <label className='block text-white mb-2 font-medium'>Technology Name</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Technology Name</label>
               <input
                 type='text'
                 value={newTech.name}
                 onChange={(e) => setNewTech({ ...newTech, name: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
                 placeholder='Enter technology name...'
                 required
               />
             </div>
 
             <div className='relative'>
-              <label className='block text-white mb-2 font-medium'>
+              <label className='block text-gray-100 mb-2 font-medium'>
                 Icon
                 {selectedIcon && (
                   <span className='ml-2 inline-flex items-center'>
@@ -264,7 +264,7 @@ export default function TechsEditor() {
                     setIsIconDropdownOpen(true);
                   }}
                   onFocus={() => setIsIconDropdownOpen(true)}
-                  className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
+                  className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400'
                   placeholder='Search for an icon (e.g., React, JavaScript, Python)...'
                 />
                 
@@ -283,7 +283,7 @@ export default function TechsEditor() {
                         >
                           {React.createElement(IconComponent as any, { className: 'w-5 h-5 text-teal-400 mr-3' })}
                           <div>
-                            <div className='text-white text-sm'>{icon.name}</div>
+                            <div className='text-gray-100 text-sm'>{icon.name}</div>
                             <div className='text-gray-400 text-xs'>{icon.category}</div>
                           </div>
                         </div>
@@ -300,7 +300,7 @@ export default function TechsEditor() {
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Tags</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Tags</label>
               <div className='bg-transparent border border-gray-600 rounded-lg p-3 max-h-40 overflow-y-auto'>
                 <div className='grid grid-cols-2 gap-2'>
                   {availableTags.map(tag => (
@@ -311,7 +311,7 @@ export default function TechsEditor() {
                         onChange={() => toggleTag(tag.id!)}
                         className='mr-2 text-teal-400 focus:ring-teal-400'
                       />
-                      <span className='text-white text-sm'>{tag.name}</span>
+                      <span className='text-gray-100 text-sm'>{tag.name}</span>
                     </label>
                   ))}
                 </div>
@@ -331,11 +331,11 @@ export default function TechsEditor() {
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Experience Level</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Experience Level</label>
               <select
                 value={newTech.experience}
                 onChange={(e) => setNewTech({ ...newTech, experience: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400'
               >
                 <option value='' className='bg-gray-800'>Select experience level...</option>
                 <option value='Beginner' className='bg-gray-800'>Beginner</option>
@@ -346,11 +346,11 @@ export default function TechsEditor() {
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Comfort Level</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Comfort Level</label>
               <select
                 value={newTech.comfortLevel}
                 onChange={(e) => setNewTech({ ...newTech, comfortLevel: e.target.value })}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-400'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400'
               >
                 <option value='' className='bg-gray-800'>Select comfort level...</option>
                 <option value='Learning' className='bg-gray-800'>Learning</option>
@@ -361,12 +361,12 @@ export default function TechsEditor() {
             </div>
 
             <div>
-              <label className='block text-white mb-2 font-medium'>Summary</label>
+              <label className='block text-gray-100 mb-2 font-medium'>Summary</label>
               <textarea
                 value={newTech.summary}
                 onChange={(e) => setNewTech({ ...newTech, summary: e.target.value })}
                 rows={4}
-                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-vertical'
+                className='w-full px-4 py-3 bg-transparent border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-vertical'
                 placeholder='Enter a detailed summary or description of this technology...'
               />
             </div>
@@ -384,7 +384,7 @@ export default function TechsEditor() {
                 <button
                   type='button'
                   onClick={resetForm}
-                  className='px-6 py-3 bg-transparent border border-gray-600 text-white font-medium rounded-lg hover:border-gray-500 transition-colors'
+                  className='px-6 py-3 bg-transparent border border-gray-600 text-gray-100 font-medium rounded-lg hover:border-gray-500 transition-colors'
                 >
                   Cancel
                 </button>
@@ -416,7 +416,7 @@ export default function TechsEditor() {
                     <div className='flex items-center'>
                       {IconComponent && React.createElement(IconComponent as any, { className: 'w-6 h-6 text-teal-400 mr-3' })}
                       <div>
-                        <h4 className='text-white font-medium text-lg'>{tech.name}</h4>
+                        <h4 className='text-gray-100 font-medium text-lg'>{tech.name}</h4>
                         <p className='text-gray-400 text-sm'>Icon: {tech.icon}</p>
                         {tech.description && (
                           <p className='text-gray-300 text-sm mt-1 italic'>{tech.description}</p>

@@ -29,7 +29,7 @@ export default function AdminDashboard() {
             className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-colors ${
               activeTab === tab.id
                 ? 'bg-teal-400 text-black'
-                : 'text-gray-400 hover:text-white hover:outline hover:outline-1 hover:outline-gray-600'
+                : 'text-gray-400 hover:text-gray-100 hover:outline hover:outline-1 hover:outline-gray-600'
             }`}
           >
             <tab.icon className='mr-2 inline-block w-4 h-4' />

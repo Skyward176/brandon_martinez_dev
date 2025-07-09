@@ -3,7 +3,6 @@ import CldImage from "@/components/CldImage";
 import Link from 'next/link';
 import { useTags } from '@/hooks/useQueries';
 import Tag from '@/components/Tag';
-import ViewOnGithub from "./ViewOnGithub";
 
 interface ProjectCardProps {
   name: string;
@@ -40,7 +39,7 @@ const ProjectCard = (props: ProjectCardProps) => {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className='rounded-lg'
+              className='rounded-lg border border-pink-300'
             />
           </div>
         );
@@ -53,7 +52,7 @@ const ProjectCard = (props: ProjectCardProps) => {
           src={props.img}
           width={400}
           height={400}
-          className='w-full object-contain rounded-lg mb-4'
+          className='w-full object-contain border border-pink-300 rounded-lg mb-4'
           alt={`image of ${props.name}`}
         />
       );
@@ -63,37 +62,39 @@ const ProjectCard = (props: ProjectCardProps) => {
   };
 
   return (
-    <div className='flex flex-col w-full p-6 border-solid border-1 border-gray-700 rounded-lg hover:border-teal-400 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg'>
+    <div className='flex flex-col w-full p-6 my-2 mx-2 border-solid border-1 border-gray-400 rounded-lg hover:border-teal-400 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg'>
       <div className='cursor-pointer' onClick={() => props.id && window.open(`/projects/${props.id}`, '_blank')}>
-      <h1 className='text-2xl md:text-3xl lg:text-4xl font-extralight text-teal-400 mb-4 break-words leading-tight hover:text-teal-300 transition-colors duration-300 ease-in-out'>
-        {props.name}
-      </h1>
-      
-      {renderMedia()}
-      
-      <p className='mb-3 text-gray-100'>{props.description}</p>
+        <h1 className='text-2xl md:text-3xl lg:text-4xl font-extralight text-teal-400 mb-4 break-words leading-tight hover:text-teal-300 transition-colors duration-300 ease-in-out'>
+          {props.name}
+        </h1>
+        
+        {renderMedia()}
+        
+        <p className='mb-3'>{props.description}</p>
       </div>
       
       {/* Tags */}
       {props.tags && props.tags.length > 0 && (
-      <div className='flex flex-wrap gap-2 mb-4'>
-        {props.tags.map((tagId, index) => {
-        const tag = allTags.find(t => t.id === tagId);
-        return tag ? (
-          <Tag 
-          key={index}
-          id={tag.id || tagId}
-          name={tag.name}
-          size="large"
-          variant="default"
-          />
-        ) : null;
-        })}
-      </div>
+        <div className='flex flex-wrap gap-2 mb-4'>
+          {props.tags.map((tagId, index) => {
+            const tag = allTags.find(t => t.id === tagId);
+            return tag ? (
+              <Tag 
+                key={index}
+                id={tag.id || tagId}
+                name={tag.name}
+                size="large"
+                variant="default"
+              />
+            ) : null;
+          })}
+        </div>
       )}
-
-      <div className="mt-auto">
-      <ViewOnGithub className="bottom" url={props.url} />
+      
+      <div className='mt-auto'>
+        <a href={props.url} className='text-teal-400 hover:text-teal-300 transition-colors duration-300 ease-in-out'>
+          Check it out here!
+        </a>
       </div>
     </div>
   );

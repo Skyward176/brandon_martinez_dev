@@ -118,7 +118,7 @@ export default async function TechPage({ params }: TechPageProps) {
   const decodedTechName = decodeURIComponent(params.tech);
 
   return (
-    <div className='bg-black text-white p-8 h-full'>
+    <div className='bg-black text-gray-100 p-8 h-full'>
       <div className='max-w-6xl mx-auto h-full'>
         {/* Tech Header */}
         <div className='text-center mb-12'>
@@ -146,13 +146,13 @@ export default async function TechPage({ params }: TechPageProps) {
               {tech.stats.experience && (
                 <div className='bg-gray-900 rounded-lg p-4 border border-gray-700'>
                   <h3 className='text-teal-400 font-medium mb-2'>Experience Level</h3>
-                  <p className='text-white text-lg'>{tech.stats.experience}</p>
+                  <p className='text-gray-100 text-lg'>{tech.stats.experience}</p>
                 </div>
               )}
               {tech.stats.comfortLevel && (
                 <div className='bg-gray-900 rounded-lg p-4 border border-gray-700'>
                   <h3 className='text-teal-400 font-medium mb-2'>Comfort Level</h3>
-                  <p className='text-white text-lg'>{tech.stats.comfortLevel}</p>
+                  <p className='text-gray-100 text-lg'>{tech.stats.comfortLevel}</p>
                 </div>
               )}
             </div>
@@ -162,7 +162,7 @@ export default async function TechPage({ params }: TechPageProps) {
           {tech.summary && (
             <div className='bg-gray-900 rounded-lg p-6 border border-gray-700 mb-12 max-w-4xl mx-auto'>
               <h2 className='text-2xl font-extralight text-teal-400 mb-4'>About {tech.name}</h2>
-              <p className='text-white leading-relaxed text-lg'>{tech.summary}</p>
+              <p className='text-gray-100 leading-relaxed text-lg'>{tech.summary}</p>
             </div>
           )}
         </div>

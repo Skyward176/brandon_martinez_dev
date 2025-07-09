@@ -33,14 +33,14 @@ function Projects() {
 
   if (loading) {
     return (
-      <div className='flex flex-col md:flex-row text-white p-8'>
+      <div className='flex flex-col md:flex-row text-gray-100 p-8'>
         <div>Loading projects...</div>
       </div>
     );
   }
 
   return (
-    <div className='flex flex-col md:flex-row text-white p-8 max-w-screen-2xl mx-auto h-full'>
+    <div className='flex flex-col md:flex-row text-gray-100 p-8 max-w-screen-2xl mx-auto h-full gap-4'>
       {projects.map((project: any) => (
         <ProjectCard
           key={project.id}

@@ -1,7 +1,7 @@
 import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import Link from '@/components/Link';
 import Tag from '@/components/Tag';
 
 interface BlogPostPageProps {
@@ -67,22 +67,46 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   
   const formatDate = (timestamp: any) => {
     if (!timestamp) return '';
-    const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
+    
+    try {
+      let date;
+      
+      // Handle Firestore timestamp with toDate method
+      if (timestamp && typeof timestamp.toDate === 'function') {
+        date = timestamp.toDate();
+      } 
+      // Handle Firestore timestamp with seconds property
+      else if (timestamp && timestamp.seconds) {
+        date = new Date(timestamp.seconds * 1000);
+      }
+      // Handle regular Date object or date string
+      else {
+        date = new Date(timestamp);
+      }
+      
+      // Check if date is valid
+      if (isNaN(date.getTime())) {
+        return '';
+      }
+      
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    } catch (error) {
+      console.warn('Error formatting date:', error, timestamp);
+      return '';
+    }
   };
 
   return (
-    <div className='bg-black text-white p-8 h-full overflow-auto'>
+    <div className='bg-black text-gray-100 p-8 h-full overflow-auto'>
       <div className='max-w-4xl mx-auto'>
         {/* Navigation */}
         <div className='mb-8'>
           <Link 
             href='/blog'
-            className='text-teal-400 hover:text-teal-300 transition-colors inline-flex items-center'
           >
             ← Back to Blog
           </Link>
@@ -118,7 +142,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         
         {/* Post Content */}
         <article className='prose prose-invert prose-lg max-w-none'>
-          <div className='text-white leading-relaxed whitespace-pre-wrap'>
+          <div className='text-gray-100 leading-relaxed whitespace-pre-wrap'>
             {post.content}
           </div>
         </article>

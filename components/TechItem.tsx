@@ -111,20 +111,21 @@ export default function TechItem({ tech }: TechItemProps) {
 
   return (
     <li className='my-2 group relative'>
-      <Link 
-        href={`/techs/${encodeURIComponent(tech.name)}`}
-        className='block'
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseMove}
-      >
         <div className='flex flex-row justify-left items-center p-3 rounded-lg cursor-pointer border border-transparent transition-all duration-300 group-hover:border-gray-600'>
           {React.createElement(IconComponent as any, { className: 'mr-3 text-4xl text-teal-400 transition-all duration-300 group-hover:text-pink-300 group-hover:scale-110' })}
           <div className='flex w-full'>
             <div className="flex items-center flex-wrap gap-1">
-              <p className='text-white font-medium transition-colors duration-300 group-hover:text-teal-300'>
-                {tech.name}
-              </p>
+              <Link 
+                href={`/techs/${encodeURIComponent(tech.name)}`}
+                className='block'
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onMouseMove={handleMouseMove}
+              >
+                <p className='text-gray-100 font-medium transition-colors duration-300 group-hover:text-teal-300'>
+                  {tech.name}
+                </p>
+              </Link>
               {tagNames.length > 0 && (
                 tagNames.map((tagName: string, tagIndex: number) => (
                   <Tag 
@@ -150,7 +151,7 @@ export default function TechItem({ tech }: TechItemProps) {
               top: `${mousePosition.y + 10}px`,
             }}
           >
-            <div className='text-white text-sm'>
+            <div className='text-gray-100 text-sm'>
               <div className='font-semibold text-teal-300 mb-2 break-words'>{tech.name}</div>
               
               {tech.stats && (tech.stats.experience || tech.stats.comfortLevel) && (
@@ -158,13 +159,13 @@ export default function TechItem({ tech }: TechItemProps) {
                   {tech.stats.experience && (
                     <div className='flex mb-1 gap-2'>
                       <span className='text-gray-300 text-xs break-words flex-shrink-0'>Experience:</span>
-                      <span className='text-white text-xs break-words'>{tech.stats.experience}</span>
+                      <span className='text-gray-100 text-xs break-words'>{tech.stats.experience}</span>
                     </div>
                   )}
                   {tech.stats.comfortLevel && (
                     <div className='flex mb-1 gap-2'>
                       <span className='text-gray-300 text-xs break-words flex-shrink-0'>Comfort Level:</span>
-                      <span className='text-white text-xs break-words'>{tech.stats.comfortLevel}</span>
+                      <span className='text-gray-100 text-xs break-words'>{tech.stats.comfortLevel}</span>
                     </div>
                   )}
                 </div>
@@ -174,7 +175,6 @@ export default function TechItem({ tech }: TechItemProps) {
             {/* Tooltip Arrow - removed since it follows cursor */}
           </div>
         )}
-      </Link>
     </li>
   );
 }

@@ -17,12 +17,37 @@ function BlogPostSmall({ id, title, content, createdAt, tags }: BlogPostSmallPro
   
   const formatDate = (timestamp: any) => {
     if (!timestamp) return '';
-    const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    });
+    
+    try {
+      let date;
+      
+      // Handle Firestore timestamp with toDate method
+      if (timestamp && typeof timestamp.toDate === 'function') {
+        date = timestamp.toDate();
+      } 
+      // Handle Firestore timestamp with seconds property
+      else if (timestamp && timestamp.seconds) {
+        date = new Date(timestamp.seconds * 1000);
+      }
+      // Handle regular Date object or date string
+      else {
+        date = new Date(timestamp);
+      }
+      
+      // Check if date is valid
+      if (isNaN(date.getTime())) {
+        return '';
+      }
+      
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+    } catch (error) {
+      console.warn('Error formatting date:', error, timestamp);
+      return '';
+    }
   };
 
   // Create a preview of the content (first 150 characters)
@@ -32,7 +57,7 @@ function BlogPostSmall({ id, title, content, createdAt, tags }: BlogPostSmallPro
     <Link href={`/blog/${id}`} className='block'>
       <div className='bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-teal-400 transition-all duration-500 ease-in-out cursor-pointer group transform hover:scale-[1.02] hover:shadow-lg'>
         <div className='flex items-start justify-between mb-2'>
-          <h3 className='text-white font-medium text-lg group-hover:text-teal-400 transition-colors duration-300 ease-in-out flex-1 mr-4'>
+          <h3 className='text-gray-100 font-medium text-lg group-hover:text-teal-400 transition-colors duration-300 ease-in-out flex-1 mr-4'>
             {title}
           </h3>
           <span className='text-gray-400 text-sm flex-shrink-0'>

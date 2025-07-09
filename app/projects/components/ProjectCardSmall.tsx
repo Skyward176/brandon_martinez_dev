@@ -34,7 +34,7 @@ const ProjectCardSmall = (props: ProjectCardSmallProps) => {
           
           {/* Project Info */}
           <div className='flex-1 min-w-0'>
-            <h3 className='text-white font-medium text-lg mb-1 group-hover:text-teal-400 transition-colors duration-300 ease-in-out truncate'>
+            <h3 className='text-gray-100 font-medium text-lg mb-1 group-hover:text-teal-400 transition-colors duration-300 ease-in-out truncate'>
               {props.name}
             </h3>
             <p className='text-gray-400 text-sm mb-2' style={{

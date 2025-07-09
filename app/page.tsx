@@ -8,6 +8,7 @@ import { useIdentity } from '@/contexts/IdentityContext';
 
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import Link from '@/components/Link';
 
 const loader = async () => { //loads homepage content from db
   const docRef = await getDocs(collection(db, 'homepage'));
@@ -78,7 +79,7 @@ export default function Home() {
   };
 
   return (
-    <div className='bg-black h-full overflow-hidden'>
+    <div className='bg-black h-full font-extralight overflow-hidden'>
       {/* Mobile Layout - 2 rows: Row 1 has 2 cols (image + about), Row 2 has techlist */}
       <div className='md:hidden h-full flex flex-col p-4 pt-8'>
         {/* Row 1 - Image and About Me - fit content */}
@@ -101,7 +102,7 @@ export default function Home() {
             <p className='text-teal-400 text-3xl sm:text-4xl mb-2'>
               About Me
             </p>
-            <p className='text-white font-extralight text-sm sm:text-base'> 
+            <p className='text-gray-100 font-extralight text-sm sm:text-base'> 
               {processText(homeData?.about) || "Loading . . ."}
             </p>
           </div>
@@ -124,11 +125,11 @@ export default function Home() {
               placeholder='Search techs and skills...'
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className='w-full pl-10 pr-4 py-3 bg-black border-b border-pink-300 rounded-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:rounded-lg text-base transition-all duration-300 ease-in-out'
+              className='w-full pl-10 pr-4 py-3 bg-black border-b border-pink-300 rounded-none text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:rounded-lg text-base transition-all duration-300 ease-in-out'
             />
           </div>
 
-          <ul className='text-lg text-white font-extralight flex-1 max-h-screen overflow-auto pb-4 min-h-0'>
+          <ul className='text-lg text-gray-100 font-extralight flex-1 max-h-screen overflow-auto pb-4 min-h-0'>
             {filteredTechs.length > 0 ? filteredTechs.map((tech: any, index: number) => (
               <TechItem key={index} tech={tech} />
             )) : homeData?.techs ? (
@@ -147,7 +148,7 @@ export default function Home() {
         {/* Column 1 - Tech List */}
         <div className='flex flex-col h-full'>
           <div className='h-[4.5rem] flex items-center justify-center flex-shrink-0'>
-            <p className='text-center text-teal-400 text-4xl'>
+            <p className='text-center font-extralight text-teal-400 text-4xl'>
               Stuff I Know:
             </p>
           </div>
@@ -162,11 +163,11 @@ export default function Home() {
               placeholder='Search techs and skills...'
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className='w-full pl-10 pr-4 py-2 bg-black border-b border-pink-300 rounded-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:rounded-lg transition-all duration-300 ease-in-out'
+              className='w-full pl-10 pr-4 py-2 bg-black border-b border-pink-300 rounded-none text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:rounded-lg transition-all duration-300 ease-in-out'
             />
           </div>
 
-          <ul className='text-xl text-white font-extralight flex-1 max-h-screen pb-72 overflow-scroll min-h-0'>
+          <ul className='text-xl text-gray-100 font-extralight flex-1 max-h-screen pb-72 overflow-scroll min-h-0'>
             {filteredTechs.length > 0 ? filteredTechs.map((tech: any, index: number) => (
               <TechItem key={index} tech={tech} />
             )) : homeData?.techs ? (
@@ -182,12 +183,12 @@ export default function Home() {
         {/* Column 2 - About Me */}
         <div className='flex flex-col h-full'>
           <div className='h-[4.5rem] flex items-center justify-center flex-shrink-0'>
-            <p className='text-center text-teal-400 text-4xl'>
+            <p className='text-center font-extralight text-teal-400 text-4xl'>
               About Me
             </p>
           </div>
           <div className='flex-1 flex items-start justify-center pt-4'>
-            <p className='text-white font-extralight text-center text-xl max-w-prose'> 
+            <p className='text-gray-100 font-extralight text-center text-xl max-w-prose'> 
               {processText(homeData?.about) || "Loading . . ."}
             </p> 
           </div>
@@ -196,7 +197,7 @@ export default function Home() {
         {/* Column 3 - Image */}
         <div className="flex flex-col h-full">
           <div className='h-[4.5rem] flex items-center justify-center flex-shrink-0'>
-            <p className='text-center text-teal-400 text-4xl'>
+            <p className='text-center font-extralight text-teal-400 text-4xl'>
               Look, it's me!
             </p>
           </div>

@@ -8,7 +8,7 @@ function Blog() {
 
   if (isLoading) {
     return (
-      <div className='bg-black text-white p-8 h-full'>
+      <div className='bg-black text-gray-100 p-8 h-full'>
         <div className='max-w-4xl mx-auto'>
           <h1 className='text-5xl font-extralight text-teal-400 text-center mb-8'>Blog</h1>
           <div className='text-center text-gray-400 mt-16'>
@@ -21,7 +21,7 @@ function Blog() {
 
   if (error) {
     return (
-      <div className='bg-black text-white p-8 h-full'>
+      <div className='bg-black text-gray-100 p-8 h-full'>
         <div className='max-w-4xl mx-auto'>
           <h1 className='text-5xl font-extralight text-teal-400 text-center mb-8'>Blog</h1>
           <div className='text-center text-red-400 mt-16'>
@@ -43,7 +43,7 @@ function Blog() {
   });
 
   return (
-    <div className='bg-black text-white p-8 pb-16 h-full overflow-auto'>
+    <div className='bg-black text-gray-100 p-8 pb-16 h-full overflow-auto'>
       <div className='max-w-4xl mx-auto'>
         <h1 className='text-5xl font-extralight text-teal-400 text-center mb-8'>Blog</h1>
         

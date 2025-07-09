@@ -20,7 +20,7 @@ export default function AdminPage() {
   if (loading) {
     return (
       <div className='bg-black h-full flex items-center justify-center'>
-        <div className='text-white text-xl'>Loading...</div>
+        <div className='text-gray-100 text-xl'>Loading...</div>
       </div>
     );
   }

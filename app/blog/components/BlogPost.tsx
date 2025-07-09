@@ -17,12 +17,37 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
   
   const formatDate = (timestamp: any) => {
     if (!timestamp) return '';
-    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
+    
+    try {
+      let date;
+      
+      // Handle Firestore timestamp with toDate method
+      if (timestamp && typeof timestamp.toDate === 'function') {
+        date = timestamp.toDate();
+      } 
+      // Handle Firestore timestamp with seconds property
+      else if (timestamp && timestamp.seconds) {
+        date = new Date(timestamp.seconds * 1000);
+      }
+      // Handle regular Date object or date string
+      else {
+        date = new Date(timestamp);
+      }
+      
+      // Check if date is valid
+      if (isNaN(date.getTime())) {
+        return '';
+      }
+      
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    } catch (error) {
+      console.warn('Error formatting date:', error, timestamp);
+      return '';
+    }
   };
 
   return (
@@ -48,7 +73,7 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
         </div>
       )}
       
-      <div className='text-white leading-relaxed whitespace-pre-wrap'>
+      <div className='text-gray-100 leading-relaxed whitespace-pre-wrap'>
         {content}
       </div>
     </article>
