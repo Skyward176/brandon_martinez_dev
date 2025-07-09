@@ -8,8 +8,7 @@ import NavbarWrapper from '@/components/navbar';
 import {Providers} from './providers';
 
 export const metadata: Metadata = {
-  title: 'Brandon Martinez',
-  description: 'My portfolio.',
+  description: 'My personal website :D',
 }
 
 export default function RootLayout({
@@ -19,11 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='dark bg-black h-screen overflow-hidden'>
+      <body className='dark bg-black h-screen overflow-auto md:overflow-hidden'>
         <Providers>
-          <div className='h-screen flex flex-col'>
+          <div className='min-h-screen md:h-screen flex flex-col'>
             <NavbarWrapper />
-            <div className='flex-1 bg-black overflow-hidden'>
+            <div className='flex-1 bg-black overflow-visible md:overflow-auto'>
               {children}
             </div>
           </div>

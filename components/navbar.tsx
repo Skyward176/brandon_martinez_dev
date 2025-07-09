@@ -87,11 +87,15 @@ function NavbarWrapper() {
             {isIris ? 'Iris' : 'Brandon'} <span className="text-pink-300">{isIris ? 'Annelise Martinez' : 'Martinez'}</span>
           </p>
           <p className='text-4xl text-teal-400 font-extralight text-center md:hidden drop-shadow-lg'> 
-            {getInitials()} 
+            {isIris ? (
+              <>I<span className="text-pink-300">AM</span></>
+            ) : (
+              <>B<span className="text-pink-300">M</span></>
+            )}
           </p>
         </div>
       </NavbarBrand>
-      <NavbarContent justify='end'>
+      <NavbarContent justify='end' className="hidden md:flex">
             {pages.map((page) => (
               <NavbarItem key={page.name}>
                 <Link 
@@ -116,15 +120,13 @@ function NavbarWrapper() {
                       }`}>
                       Admin
                     </Link>
-                    <Button
+                    <button
                       onClick={handleLogout}
-                      variant="ghost"
-                      size="sm"
-                      className="text-pink-400 hover:text-pink-300 bg-transparent transition-all duration-300"
-                      startContent={<HiArrowRightOnRectangle />}
+                      className="hover:underline font-extralight text-xl focus:text-pink-400 transition-all duration-300 text-pink-400 hover:text-pink-300 bg-transparent border-none cursor-pointer flex items-center gap-2"
                     >
+                      <HiArrowRightOnRectangle />
                       Logout
-                    </Button>
+                    </button>
                   </div>
                 ) : (
                   <div></div>
@@ -159,14 +161,13 @@ function NavbarWrapper() {
                     }`}>
                     Admin
                   </Link>
-                  <Button
+                  <button
                     onClick={handleLogout}
-                    variant="ghost"
-                    className="text-pink-400 hover:text-pink-300 bg-transparent justify-start p-0 transition-all duration-300"
-                    startContent={<HiArrowRightOnRectangle />}
+                    className="font-extralight text-xl focus:text-pink-400 transition-all duration-300 text-pink-400 hover:text-pink-300 bg-transparent border-none cursor-pointer flex items-center gap-2 justify-start p-0"
                   >
+                    <HiArrowRightOnRectangle />
                     Logout
-                  </Button>
+                  </button>
                 </div>
               ) : (
                 <Link 

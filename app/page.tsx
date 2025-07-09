@@ -78,15 +78,82 @@ export default function Home() {
   };
 
   return (
-    <div className='bg-black flex flex-col md:flex-row h-full'>
-        <div className='w-100% p-4 mx-16 md:mx-auto my-auto mt-24 md:w-1/3 h-full'>
-          <p className='text-center text-teal-400 text-4xl'>
+    <div className='bg-black h-full overflow-hidden'>
+      {/* Mobile Layout - 2 rows: Row 1 has 2 cols (image + about), Row 2 has techlist */}
+      <div className='md:hidden h-full flex flex-col p-4 pt-8'>
+        {/* Row 1 - Image and About Me - fit content */}
+        <div className='grid grid-cols-2 gap-4 mb-4'>
+          {/* Image - Row 1, Col 1 */}
+          <div className='flex justify-center items-start'>
+            <div className="relative w-[120px] h-[160px] sm:w-[150px] sm:h-[200px]">
+              <CldImage
+                src={homeData?.image?.src || '/portfolio/profile'}
+                alt='a picture of me'
+                fill
+                sizes="(max-width: 640px) 120px, 150px"
+                className="rounded-md object-cover"
+              />
+            </div>
+          </div>
+          
+          {/* About Me - Row 1, Col 2 */}
+          <div className='flex flex-col justify-start'>
+            <p className='text-teal-400 text-3xl sm:text-4xl mb-2'>
+              About Me
+            </p>
+            <p className='text-white font-extralight text-sm sm:text-base'> 
+              {processText(homeData?.about) || "Loading . . ."}
+            </p>
+          </div>
+        </div>
+
+        {/* Row 2 - Tech List taking remaining space */}
+        <div className='flex-1 flex flex-col min-h-0'>
+          <br/>
+          <p className='text-center text-teal-400 text-3xl sm:text-4xl mb-4'>
             Stuff I Know:
           </p>
-          <br/>
           
           {/* Search Bar */}
-          <div className='relative mb-4 bg-black'>
+          <div className='relative mb-4 bg-black flex-shrink-0'>
+            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+              <FaSearch className='h-4 w-4 text-gray-400' />
+            </div>
+            <input
+              type='text'
+              placeholder='Search techs and skills...'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className='w-full pl-10 pr-4 py-3 bg-black border-b border-pink-300 rounded-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:rounded-lg text-base'
+            />
+          </div>
+
+          <ul className='text-lg text-white font-extralight flex-1 max-h-screen overflow-auto pb-4 min-h-0'>
+            {filteredTechs.length > 0 ? filteredTechs.map((tech: any, index: number) => (
+              <TechItem key={index} tech={tech} />
+            )) : homeData?.techs ? (
+              <li className='my-2 text-gray-400 text-center'>No technologies found matching "{searchTerm}"</li>
+            ) : (
+              <>
+                Loading . . . 
+              </>
+            )}
+          </ul>
+        </div>
+      </div>
+
+      {/* Desktop Layout - 1 row, 3 columns: techlist | about | image */}
+      <div className='hidden md:grid md:grid-cols-3 md:gap-8 md:h-screen md:p-8'>
+        {/* Column 1 - Tech List */}
+        <div className='flex flex-col h-full'>
+          <div className='h-[4.5rem] flex items-center justify-center flex-shrink-0'>
+            <p className='text-center text-teal-400 text-4xl'>
+              Stuff I Know:
+            </p>
+          </div>
+          
+          {/* Search Bar */}
+          <div className='relative mb-4 bg-black flex-shrink-0'>
             <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
               <FaSearch className='h-4 w-4 text-gray-400' />
             </div>
@@ -99,43 +166,53 @@ export default function Home() {
             />
           </div>
 
-          <ul className='text-xl text-white font-extralight h-full pb-16 overflow-auto'>
+          <ul className='text-xl text-white font-extralight flex-1 max-h-screen pb-72 overflow-scroll min-h-0'>
             {filteredTechs.length > 0 ? filteredTechs.map((tech: any, index: number) => (
               <TechItem key={index} tech={tech} />
             )) : homeData?.techs ? (
               <li className='my-2 text-gray-400 text-center'>No technologies found matching "{searchTerm}"</li>
             ) : (
-              // Fallback to hardcoded list if no techs in database
               <>
                 Loading . . . 
               </>
             )}
           </ul>
         </div>
-        <div className='w-100% p-4 mt-24 mx-16 md:mx-auto my-auto md:w-1/3 h-full'>
-          <p className='text-center text-teal-400 text-4xl'>
-            About Me
-          </p>
-          <br/>
-          <p className='text-white font-extralight text-center text-xl'> 
-            {processText(homeData?.about) || "Loading . . ."}
-          </p> 
+
+        {/* Column 2 - About Me */}
+        <div className='flex flex-col h-full'>
+          <div className='h-[4.5rem] flex items-center justify-center flex-shrink-0'>
+            <p className='text-center text-teal-400 text-4xl'>
+              About Me
+            </p>
+          </div>
+          <div className='flex-1 flex items-start justify-center pt-4'>
+            <p className='text-white font-extralight text-center text-xl max-w-prose'> 
+              {processText(homeData?.about) || "Loading . . ."}
+            </p> 
+          </div>
         </div>
-        <div className="mt-24 flex flex-col w-1/3">
+
+        {/* Column 3 - Image */}
+        <div className="flex flex-col h-full">
+          <div className='h-[4.5rem] flex items-center justify-center flex-shrink-0'>
             <p className='text-center text-teal-400 text-4xl'>
               Look, it's me!
             </p>
-            <br/>
-            <div className="relative w-[300px] h-[400px] mx-auto">
-            <CldImage
-              src={homeData?.image?.src || '/portfolio/profile'}
-              alt='a picture of me'
-              fill
-              sizes="(max-width: 400px) 90vw, (max-width: 600px) 70vw, 300px"
-              className="rounded-md object-cover"
-            />
+          </div>
+          <div className='flex-1 flex items-start justify-center pt-4'>
+            <div className="relative w-[250px] md:w-[300px] h-[333px] md:h-[400px] max-h-[60vh]">
+              <CldImage
+                src={homeData?.image?.src || '/portfolio/profile'}
+                alt='a picture of me'
+                fill
+                sizes="(max-width: 768px) 250px, 300px"
+                className="rounded-md object-cover"
+              />
             </div>
+          </div>
         </div>
       </div>
+    </div>
   )
 }
