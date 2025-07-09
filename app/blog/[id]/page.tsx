@@ -2,6 +2,7 @@ import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firesto
 import { db } from '@/lib/firebase';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Tag from '@/components/Tag';
 
 interface BlogPostPageProps {
   params: {
@@ -103,13 +104,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.tags.map((tagId, index) => {
               const tag = tags.find(t => t.id === tagId);
               return tag ? (
-                <Link 
-                  key={index}
-                  href={`/tags/${encodeURIComponent(tag.name)}`}
-                  className='px-3 py-1 bg-pink-300 text-black text-sm rounded-full hover:bg-pink-400 transition-colors cursor-pointer'
-                >
-                  {tag.name}
-                </Link>
+                  <Tag
+                    key={index}
+                    id={tag.id}
+                    name={tag.name}
+                    size="large"
+                    variant="default"
+                  />
               ) : null;
             })}
           </div>

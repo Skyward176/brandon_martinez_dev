@@ -2,6 +2,7 @@
 import CldImage from "@/components/CldImage";
 import Link from 'next/link';
 import { useTags } from '@/hooks/useQueries';
+import Tag from '@/components/Tag';
 
 interface ProjectCardProps {
   name: string;
@@ -78,13 +79,13 @@ const ProjectCard = (props: ProjectCardProps) => {
           {props.tags.map((tagId, index) => {
             const tag = allTags.find(t => t.id === tagId);
             return tag ? (
-              <Link 
+              <Tag 
                 key={index}
-                href={`/tags/${encodeURIComponent(tag.name)}`}
-                className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-all duration-300 ease-in-out transform hover:scale-105'
-              >
-                {tag.name}
-              </Link>
+                id={tag.id || tagId}
+                name={tag.name}
+                size="large"
+                variant="default"
+              />
             ) : null;
           })}
         </div>

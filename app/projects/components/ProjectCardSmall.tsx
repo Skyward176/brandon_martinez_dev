@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useTags } from '@/hooks/useQueries';
+import Tag from '@/components/Tag';
 
 interface ProjectCardSmallProps {
   name: string;
@@ -51,18 +52,23 @@ const ProjectCardSmall = (props: ProjectCardSmallProps) => {
                 {props.tags.slice(0, 3).map((tagId, index) => {
                   const tag = allTags.find(t => t.id === tagId);
                   return tag ? (
-                    <span 
+                    <Tag 
                       key={index}
-                      className='px-2 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-all duration-300 ease-in-out transform hover:scale-105'
-                    >
-                      {tag.name}
-                    </span>
+                      id={tag.id || tagId}
+                      name={tag.name}
+                      size="small"
+                      variant="default"
+                    />
                   ) : null;
                 })}
                 {props.tags.length > 3 && (
-                  <span className='px-2 py-1 bg-gray-600 text-gray-300 text-xs rounded-full'>
-                    +{props.tags.length - 3}
-                  </span>
+                  <Tag 
+                    id="more"
+                    name={`+${props.tags.length - 3}`}
+                    size="small"
+                    variant="static"
+                    clickable={false}
+                  />
                 )}
               </div>
             )}

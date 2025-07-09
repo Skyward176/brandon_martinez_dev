@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useTags } from '@/hooks/useQueries';
+import Tag from '@/components/Tag';
 
 interface BlogPostProps {
   id?: string;
@@ -35,16 +36,13 @@ function BlogPost({ id, title, content, createdAt, tags }: BlogPostProps) {
           {tags.map((tagId, index) => {
             const tag = allTags.find(t => t.id === tagId);
             return tag ? (
-              <span 
+              <Tag 
                 key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.location.href = `/tags/${encodeURIComponent(tag.name)}`;
-                }}
-                className='px-3 py-1 bg-pink-300 text-black text-xs rounded-full hover:bg-pink-400 transition-all duration-300 ease-in-out cursor-pointer transform hover:scale-105 hover:shadow-lg'
-              >
-                {tag.name}
-              </span>
+                id={tag.id || tagId}
+                name={tag.name}
+                size="large"
+                variant="default"
+              />
             ) : null;
           })}
         </div>

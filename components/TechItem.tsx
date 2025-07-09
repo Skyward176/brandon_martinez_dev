@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import Tag from '@/components/Tag';
 // Import major icon categories from react-icons
 import * as Ai from 'react-icons/ai';
 import * as Bi from 'react-icons/bi';
@@ -126,12 +127,14 @@ export default function TechItem({ tech }: TechItemProps) {
               </p>
               {tagNames.length > 0 && (
                 tagNames.map((tagName: string, tagIndex: number) => (
-                  <span 
+                  <Tag 
                     key={tagIndex}
-                    className='px-2 py-1 border-1 border-pink-300 text-white text-xs rounded-full transition-all duration-300 group-hover:text-black group-hover:font-medium group-hover:bg-pink-400 group-hover:scale-105 ml-3'
-                  >
-                    {tagName}
-                  </span>
+                    id={tagName}
+                    name={tagName}
+                    size="small"
+                    variant="default"
+                    className="ml-3"
+                  />
                 ))
               )}
             </div>
