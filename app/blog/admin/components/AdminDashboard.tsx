@@ -1,11 +1,12 @@
 'use client';
 import { useState } from 'react';
-import { HiPencil, HiRocketLaunch, HiBolt, HiTag, HiHome } from 'react-icons/hi2';
+import { HiPencil, HiRocketLaunch, HiBolt, HiTag, HiHome, HiDocumentText } from 'react-icons/hi2';
 import BlogEditor from './BlogEditor';
 import ProjectsEditor from './ProjectsEditor'; // Projects management
 import TechsEditor from './TechsEditor';
 import HomepageEditor from './HomepageEditor';
 import TagEditor from './TagEditor';
+import ResumeEditor from './ResumeEditor';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('blog');
@@ -16,6 +17,7 @@ export default function AdminDashboard() {
     { id: 'techs', label: 'Technologies', icon: HiBolt },
     { id: 'tags', label: 'Tags', icon: HiTag },
     { id: 'homepage', label: 'Homepage Content', icon: HiHome },
+    { id: 'resume', label: 'Resume', icon: HiDocumentText },
   ];
 
   return (
@@ -45,6 +47,7 @@ export default function AdminDashboard() {
         {activeTab === 'techs' && <TechsEditor />}
         {activeTab === 'tags' && <TagEditor />}
         {activeTab === 'homepage' && <HomepageEditor />}
+        {activeTab === 'resume' && <ResumeEditor />}
       </div>
     </div>
   );
