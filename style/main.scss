@@ -1,0 +1,26 @@
+body {
+	font-family: monospace;
+	text-align: center;
+}
+.navbar{
+  width:100%;
+  font-size:1rem;
+  ul{
+    list-style-type: none;
+    width:inherit;
+    display:flex;
+    li {
+      width:3rem;
+      margin:1rem;
+    }
+  }
+  a {
+    text-decoration: none;
+    color:black;
+    &[aria-current="page"] {
+      color: green;
+      font-weight: bold;
+      cursor: default; // Optional: shows the user they can't click "current" page
+    }
+  }
+}
