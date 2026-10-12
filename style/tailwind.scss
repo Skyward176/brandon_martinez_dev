@@ -1,0 +1,14 @@
+/*
+ * Tailwind CSS entry, authored in Sass.
+ *
+ * Compiled by the Tailwind CLI (which uses the `sass` package for `.scss`
+ * input) into `public/app.css`, which cargo-leptos serves from the site root.
+ * This replaces the runtime Tailwind Play CDN with a build-time, Sass-based
+ * Tailwind pipeline. Block comments (not `//`) are used so the file parses
+ * under both the Sass compiler and PostCSS's CSS parser.
+ */
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
