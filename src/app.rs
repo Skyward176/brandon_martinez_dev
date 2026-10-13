@@ -10,7 +10,9 @@ use leptos_use::{
     use_color_mode_with_options, use_cookie_with_options, use_preferred_dark,
     ColorMode, UseColorModeOptions, UseColorModeReturn, UseCookieOptions,
 };
-use crate::pages::HomePage;
+use crate::pages::{
+    HomePage, WorkAbout
+};
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
@@ -66,41 +68,40 @@ fn Navbar(
     };
 
     view! {
-        <nav class="border-b border-zinc-200 dark:border-zinc-900">
+        <nav class="border-b border-zinc-200 dark:border-zinc-900 h-md">
             <div class="max-w-6xl mx-auto px-4">
                 <div class="flex items-center justify-between gap-4 h-14">
                     <a
                         href="/"
-                        class="text-lg font-bold tracking-wide text-zinc-900 dark:text-zinc-900"
+                        class="text-2xl font-bold tracking-wide text-zinc-900 dark:text-zinc-900"
                     >
                         "Iris Martinez"
                     </a>
                     <div class="flex items-center gap-3 sm:gap-5">
-                        <button
-                            on:click=move |_| { cycle_mode() }
-                            class="flex items-center gap-2 shrink-0"
-                            aria-label="Toggle color mode"
-                        >
-                            <span class="relative inline-flex h-6 w-11 items-center rounded-full bg-zinc-300 dark:bg-zinc-700 transition-colors">
-                                <span
-                                    class="inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
-                                    // 5. Bind the classes to our instant local `visual_mode` instead of the global `theme`
-                                    class=("bg-zinc-600", move || matches!(visual_mode.get(), ColorMode::Dark))
-                                    class=("bg-zinc-900", move || matches!(visual_mode.get(), ColorMode::Auto))
-                                    class=("translate-x-6", move || matches!(visual_mode.get(), ColorMode::Dark))
-                                    class=("translate-x-0", move || !matches!(visual_mode.get(), ColorMode::Dark))
-                                />
-                            </span>
-                        </button>
                         <ul class="flex gap-2 sm:gap-4 text-sm sm:text-base">
                             <li>
-                                <a href="/about" class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900">"About"</a>
+                                <a href="/me" class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900">"Me"</a>
                             </li>
                             <li>
-                                <a href="/work" class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900">"My Work"</a>
+                                <a href="/what-i-do" class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900">"My Work"</a>
                             </li>
                             <li>
-                                <a href="/contact" class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900">"Contact"</a>
+                                <button
+                                    on:click=move |_| { cycle_mode() }
+                                    class="flex items-center gap-2 shrink-0"
+                                    aria-label="Toggle color mode"
+                                >
+                                    <span class="relative inline-flex h-6 w-11 items-center rounded-full bg-zinc-300 dark:bg-zinc-700 transition-colors">
+                                        <span
+                                            class="inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+                                            // 5. Bind the classes to our instant local `visual_mode` instead of the global `theme`
+                                            class=("bg-zinc-600", move || matches!(visual_mode.get(), ColorMode::Dark))
+                                            class=("bg-zinc-900", move || matches!(visual_mode.get(), ColorMode::Auto))
+                                            class=("translate-x-6", move || matches!(visual_mode.get(), ColorMode::Dark))
+                                            class=("translate-x-0", move || !matches!(visual_mode.get(), ColorMode::Dark))
+                                        />
+                                    </span>
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -127,6 +128,8 @@ pub fn App() -> impl IntoView {
             <main>
                 <Routes fallback=|| "This page could not be found.">
                     <Route path=path!("") view=|| view! { <HomePage /> } />
+                    <Route path=path!("me") view=|| view! { <HomePage /> } />
+                    <Route path=path!("what-i-do") view=|| view! { <WorkAbout /> } />
                 </Routes>
             </main>
         </Router>
