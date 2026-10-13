@@ -9,7 +9,7 @@ use leptos_use::{
     use_color_mode_with_options, use_cookie_with_options, use_preferred_dark,
     ColorMode, UseColorModeOptions, UseColorModeReturn, UseCookieOptions,
 };
-
+use crate::pages::HomePage;
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
@@ -46,33 +46,6 @@ pub fn App() -> impl IntoView {
                 </Routes>
             </main>
         </Router>
-    }
-}
-
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    let UseColorModeReturn { mode, set_mode, .. } =
-        use_color_mode_with_options(UseColorModeOptions::default().cookie_enabled(true));
-
-    let is_dark_preferred = use_preferred_dark();
-
-    let (test_cookie, _) = use_cookie_with_options::<String, FromToStringCodec>(
-        "test-cookie",
-        UseCookieOptions::<String, _, _>::default()
-            .max_age(3000)
-            .default_value(Some("Bogus string".to_owned())),
-    );
-
-    view! {
-        <Html {..} class=move || mode.get().to_string() />
-
-        <h1>Leptos-Use SSR Example</h1>
-        <p>Color mode: {move || format!("{:?}", mode.get())}</p>
-        <button on:click=move |_| set_mode.set(ColorMode::Light)>Change to Light</button>
-        <button on:click=move |_| set_mode.set(ColorMode::Dark)>Change to Dark</button>
-        <button on:click=move |_| set_mode.set(ColorMode::Auto)>Change to Auto</button>
-        <p>Dark preferred: {is_dark_preferred}</p>
     }
 }
 
