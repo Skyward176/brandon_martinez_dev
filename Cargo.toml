@@ -42,6 +42,8 @@ codegen-units = 1
 panic = "abort"
 
 [package.metadata.leptos]
+
+tailwind-input-file = "style/tailwind.css"
 # The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle. Defaults to the crate name
 output-name = "iris_martinez_dev"
 
@@ -52,8 +54,6 @@ site-root = "target/site"
 # Defaults to pkg
 site-pkg-dir = "pkg"
 
-# [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/iris_martinez_dev.css
-style-file = "style/main.css"
 # Assets source dir. All files found here will be copied and synchronized to site-root.
 # The assets-dir cannot have a sub directory with the same name/path as site-pkg-dir.
 #
