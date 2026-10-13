@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
 @import "tailwindcss";
 @source "../src";
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant aria-current (&[aria-current="page"]);
+@theme {
+  --font-sans: "Source Serif 4", Georgia, ui-serif, serif;
+  --font-serif: "Source Serif 4", Georgia, ui-serif, serif;
+}

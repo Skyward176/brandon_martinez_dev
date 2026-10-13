@@ -68,22 +68,34 @@ fn Navbar(
     };
 
     view! {
-        <nav class="border-b border-zinc-200 dark:border-zinc-900 h-md">
+        <nav class="border-b border-zinc-800 dark:border-zinc-200 bg-zinc-900 dark:bg-white h-md">
             <div class="max-w-6xl mx-auto px-4">
                 <div class="flex items-center justify-between gap-4 h-14">
                     <a
                         href="/"
-                        class="text-2xl font-bold tracking-wide text-zinc-900 dark:text-zinc-900"
+                        class="text-2xl tracking-wide text-zinc-100 dark:text-zinc-900"
                     >
                         "Iris Martinez"
                     </a>
                     <div class="flex items-center gap-3 sm:gap-5">
                         <ul class="flex gap-2 sm:gap-4 text-sm sm:text-base">
                             <li>
-                                <a href="/me" class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900">"Me"</a>
+                                <A
+                                    href="/me"
+                                    {..}
+                                    class="hover:underline underline-offset-4 px-1 py-1 text-zinc-300 dark:text-zinc-700 aria-current:underline aria-current:underline-offset-4 aria-current:text-zinc-100 dark:aria-current:text-zinc-900"
+                                >
+                                    "Me"
+                                </A>
                             </li>
                             <li>
-                                <a href="/what-i-do" class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900">"My Work"</a>
+                                <A
+                                    href="/what-i-do"
+                                    {..}
+                                    class="hover:underline underline-offset-4 px-1 py-1 text-zinc-300 dark:text-zinc-700 aria-current:underline aria-current:underline-offset-4 aria-current:text-zinc-100 dark:aria-current:text-zinc-900"
+                                >
+                                    "My Work"
+                                </A>
                             </li>
                             <li>
                                 <button
@@ -91,7 +103,7 @@ fn Navbar(
                                     class="flex items-center gap-2 shrink-0"
                                     aria-label="Toggle color mode"
                                 >
-                                    <span class="relative inline-flex h-6 w-11 items-center rounded-full bg-zinc-300 dark:bg-zinc-700 transition-colors">
+                                    <span class="relative inline-flex h-6 w-11 items-center rounded-full bg-zinc-700 dark:bg-zinc-300 transition-colors">
                                         <span
                                             class="inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
                                             // 5. Bind the classes to our instant local `visual_mode` instead of the global `theme`
@@ -127,7 +139,7 @@ pub fn App() -> impl IntoView {
             <Navbar theme=mode set_mode=set_mode/>
             <main>
                 <Routes fallback=|| "This page could not be found.">
-                    <Route path=path!("") view=|| view! { <HomePage /> } />
+                    <Route path=path!("") view=|| view! { <Redirect path="/me"/> } />
                     <Route path=path!("me") view=|| view! { <HomePage /> } />
                     <Route path=path!("what-i-do") view=|| view! { <WorkAbout /> } />
                 </Routes>
