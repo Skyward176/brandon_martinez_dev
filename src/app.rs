@@ -30,29 +30,47 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
 }
 
 #[component]
-fn Navbar(theme: Signal<ColorMode>) -> impl IntoView {
+fn Navbar(
+    theme: Signal<ColorMode>,
+    set_mode: WriteSignal<ColorMode>,
+) -> impl IntoView {
+    let current_mode = move || theme.get();
+    let cycle_mode = move || {
+        let next = match current_mode() {
+            ColorMode::Auto => ColorMode::Light,
+            ColorMode::Light => ColorMode::Dark,
+            ColorMode::Dark => ColorMode::Auto,
+            ColorMode::Custom(_) => ColorMode::Light,
+        };
+        set_mode.set(next);
+    };
     view! {
-        <nav class="border-b border-zinc-200">
+        <nav class="border-b border-zinc-200 dark:border-zinc-900">
             <div class="max-w-6xl mx-auto px-4">
                 <div class="flex items-center justify-between gap-4 h-14">
                     <a
                         href="/"
-                        class="text-lg font-bold tracking-wide"
+                        class="text-lg font-bold tracking-wide text-zinc-900 dark:text-zinc-900"
                     >
                         "Iris Martinez"
                     </a>
                     <div class="flex items-center gap-3 sm:gap-5">
-                        <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                            "Current mode: "
-                            <span class="font-medium text-zinc-900 dark:text-zinc-100">
-                                move::read!(|| theme.get())
-                            </span>
-                        </p>
+                        <button
+                            class="px-3 py-1.5 text-sm bg-zinc-100 dark:bg-white text-zinc-900 dark:text-zinc-900 rounded hover:bg-zinc-200 dark:hover:bg-zinc-100 transition-colors"
+                            on:click=move |_| { cycle_mode() }
+                        >
+                            {move || format!("Switch to {}", match current_mode() {
+                                ColorMode::Auto => "Light",
+                                ColorMode::Light => "Dark",
+                                ColorMode::Dark => "Auto",
+                                ColorMode::Custom(_) => "Light",
+                            })}
+                        </button>
                         <ul class="flex gap-2 sm:gap-4 text-sm sm:text-base">
                             <li>
                                 <a
                                     href="/about"
-                                    class="hover:underline underline-offset-4 px-1 py-1"
+                                    class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900"
                                 >
                                     "About"
                                 </a>
@@ -60,7 +78,7 @@ fn Navbar(theme: Signal<ColorMode>) -> impl IntoView {
                             <li>
                                 <a
                                     href="/work"
-                                    class="hover:underline underline-offset-4 px-1 py-1"
+                                    class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900"
                                 >
                                     "My Work"
                                 </a>
@@ -68,7 +86,7 @@ fn Navbar(theme: Signal<ColorMode>) -> impl IntoView {
                             <li>
                                 <a
                                     href="/contact"
-                                    class="hover:underline underline-offset-4 px-1 py-1"
+                                    class="hover:underline underline-offset-4 px-1 py-1 text-zinc-700 dark:text-zinc-900"
                                 >
                                     "Contact"
                                 </a>
@@ -94,7 +112,7 @@ pub fn App() -> impl IntoView {
         <Title text="Iris Martinez" />
 
         <Router>
-            <Navbar theme = mode/>
+            <Navbar theme=mode set_mode=set_mode/>
             <main>
                 <Routes fallback=|| "This page could not be found.">
                     <Route path=path!("") view=|| view! { <HomePage /> } />
