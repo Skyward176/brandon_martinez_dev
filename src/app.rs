@@ -73,7 +73,7 @@ fn Navbar(
                 <div class="flex items-center justify-between gap-4 h-14">
                     <a
                         href="/"
-                        class="text-2xl tracking-wide text-zinc-100 dark:text-zinc-900"
+                        class="text-2xl tracking-wide text-zinc-100 dark:text-zinc-900 origin-left transition-transform hover:scale-105"
                     >
                         "Iris Martinez"
                     </a>
@@ -83,7 +83,7 @@ fn Navbar(
                                 <A
                                     href="/me"
                                     {..}
-                                    class="hover:underline underline-offset-4 px-1 py-1 text-zinc-300 dark:text-zinc-700 aria-current:underline aria-current:underline-offset-4 aria-current:text-zinc-100 dark:aria-current:text-zinc-900"
+                                    class="inline-block hover:underline underline-offset-4 px-1 py-1 text-zinc-300 dark:text-zinc-700 aria-current:underline aria-current:underline-offset-4 aria-current:text-zinc-100 dark:aria-current:text-zinc-900 origin-center transition-transform hover:scale-105"
                                 >
                                     "Me"
                                 </A>
@@ -92,7 +92,7 @@ fn Navbar(
                                 <A
                                     href="/what-i-do"
                                     {..}
-                                    class="hover:underline underline-offset-4 px-1 py-1 text-zinc-300 dark:text-zinc-700 aria-current:underline aria-current:underline-offset-4 aria-current:text-zinc-100 dark:aria-current:text-zinc-900"
+                                    class="inline-block hover:underline underline-offset-4 px-1 py-1 text-zinc-300 dark:text-zinc-700 aria-current:underline aria-current:underline-offset-4 aria-current:text-zinc-100 dark:aria-current:text-zinc-900 origin-center transition-transform hover:scale-105"
                                 >
                                     "My Work"
                                 </A>
@@ -100,7 +100,7 @@ fn Navbar(
                             <li>
                                 <button
                                     on:click=move |_| { cycle_mode() }
-                                    class="flex items-center gap-2 shrink-0"
+                                    class="flex items-center gap-2 shrink-0 origin-center transition-transform hover:scale-105"
                                     aria-label="Toggle color mode"
                                 >
                                     <span class="relative inline-flex h-6 w-11 items-center rounded-full bg-zinc-700 dark:bg-zinc-300 transition-colors">
