@@ -30,16 +30,71 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
 }
 
 #[component]
+fn Navbar(theme: Signal<ColorMode>) -> impl IntoView {
+    view! {
+        <nav class="border-b border-zinc-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex items-center justify-between gap-4 h-14">
+                    <a
+                        href="/"
+                        class="text-lg font-bold tracking-wide"
+                    >
+                        "Iris Martinez"
+                    </a>
+                    <div class="flex items-center gap-3 sm:gap-5">
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                            "Current mode: "
+                            <span class="font-medium text-zinc-900 dark:text-zinc-100">
+                                move::read!(|| theme.get())
+                            </span>
+                        </p>
+                        <ul class="flex gap-2 sm:gap-4 text-sm sm:text-base">
+                            <li>
+                                <a
+                                    href="/about"
+                                    class="hover:underline underline-offset-4 px-1 py-1"
+                                >
+                                    "About"
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="/work"
+                                    class="hover:underline underline-offset-4 px-1 py-1"
+                                >
+                                    "My Work"
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="/contact"
+                                    class="hover:underline underline-offset-4 px-1 py-1"
+                                >
+                                    "Contact"
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    }
+}
+#[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
+    let UseColorModeReturn { mode, set_mode, .. } =
+        use_color_mode_with_options(UseColorModeOptions::default().cookie_enabled(true));
 
+    let is_dark_preferred = use_preferred_dark();
     view! {
-        <Stylesheet id="leptos" href="/pkg/start-axum.css" />
+        <Stylesheet id="leptos" href="/app.css" />
 
-        <Title text="Leptos-Use SSR Example" />
+        <Title text="Iris Martinez" />
 
         <Router>
+            <Navbar theme = mode/>
             <main>
                 <Routes fallback=|| "This page could not be found.">
                     <Route path=path!("") view=|| view! { <HomePage /> } />

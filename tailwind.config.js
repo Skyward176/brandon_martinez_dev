@@ -3,6 +3,11 @@ module.exports = {
   // The class names are written in the Leptos view!{} macros in src/**/*.rs,
   // so Tailwind must scan Rust source, not just HTML/JSX.
   content: ["./src/**/*.rs"],
+  // Leptos view!{} macros embed class strings inside Rust code that the
+  // Tailwind CLI scanner does not parse.  Explicitly safelist everything
+  // the homepage and navbar use so the build-time pipeline picks them up.
+  safelist: [
+  ],
   theme: {
     extend: {
       // The site's default typeface is serif: Tailwind's preflight applies
