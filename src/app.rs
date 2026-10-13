@@ -68,7 +68,7 @@ fn Navbar(
     };
 
     view! {
-        <nav class="border-b border-zinc-800 dark:border-zinc-200 bg-zinc-900 dark:bg-white h-md">
+        <nav class="border-b border-zinc-800 dark:border-zinc-200 bg-zinc-900 dark:bg-zinc-100 h-md">
             <div class="max-w-6xl mx-auto px-4">
                 <div class="flex items-center justify-between gap-4 h-14">
                     <a

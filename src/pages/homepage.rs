@@ -3,7 +3,7 @@ use leptos::prelude::*;
 #[component]
 pub fn HomePage() -> impl IntoView {
     view! {
-        <div class="text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col bg-white dark:bg-zinc-900">
+        <div class="text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col bg-zinc-100 dark:bg-zinc-900">
             <main class="flex-1 mx-auto max-w-6xl w-full px-4">
                 <div class="flex flex-row gap-6 py-8">
 
