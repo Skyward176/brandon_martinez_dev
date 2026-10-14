@@ -7,3 +7,22 @@
   --font-sans: "Source Serif 4", Georgia, ui-serif, serif;
   --font-serif: "Source Serif 4", Georgia, ui-serif, serif;
 }
+
+.theme-transition,
+.theme-transition * {
+  transition:
+    color 350ms ease,
+    background-color 350ms ease,
+    border-color 350ms ease,
+    text-decoration-color 350ms ease,
+    fill 350ms ease,
+    stroke 350ms ease,
+    transform 200ms ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .theme-transition * {
+    transition-duration: 0.01ms !important;
+  }
+}

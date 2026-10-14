@@ -1,14 +1,10 @@
-use std::time::Duration;
-
-use leptos::ev::{keypress, KeyboardEvent};
 use leptos::prelude::*;
 use leptos_meta::*;
 use leptos_router::components::*;
 use leptos_router::path;
-use leptos_use::storage::{use_local_storage, use_local_storage_with_options, UseStorageOptions};
 use leptos_use::{
-    use_color_mode_with_options, use_cookie_with_options, use_preferred_dark,
-    ColorMode, UseColorModeOptions, UseColorModeReturn, UseCookieOptions,
+    use_color_mode_with_options, ColorMode,
+    UseColorModeOptions, UseColorModeReturn,
 };
 use crate::pages::{
     HomePage, WorkAbout
@@ -25,7 +21,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <HydrationScripts options />
                 <link rel="stylesheet" id="leptos" href="/pkg/iris_martinez_dev.css" />
             </head>
-            <body class="font-serif">
+            <body class="font-serif theme-transition">
                 <App/>
             </body>
         </html>
@@ -41,7 +37,7 @@ fn Navbar(
     let (visual_mode, set_visual_mode) = signal(theme.get_untracked());
 
     // 2. Keep the local state in sync if the theme is changed from somewhere else
-    create_effect(move |_| {
+    Effect::new(move |_| {
         set_visual_mode.set(theme.get());
     });
 
@@ -54,17 +50,8 @@ fn Navbar(
             ColorMode::Custom(_) => ColorMode::Light,
         };
         
-        // 3. Instantly update the button's visual state for a smooth animation
         set_visual_mode.set(next.clone());
-        
-        // 4. "Respond later" - delay the heavy global DOM repaint by 150ms 
-        // to allow the toggle switch animation to finish first.
-        set_timeout(
-            move || {
-                set_mode.set(next);
-            },
-            Duration::from_millis(150),
-        );
+        set_mode.set(next);
     };
 
     view! {
@@ -130,7 +117,6 @@ pub fn App() -> impl IntoView {
     let UseColorModeReturn { mode, set_mode, .. } =
         use_color_mode_with_options(UseColorModeOptions::default().cookie_enabled(true));
 
-    let is_dark_preferred = use_preferred_dark();
     view! {
 
         <Title text="Iris Martinez" />
