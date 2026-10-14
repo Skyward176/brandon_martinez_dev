@@ -15,22 +15,26 @@ const PROJECTS: &[Project] = &[
         title: "iris_martinez_dev",
         tagline: "This website",
         status: "Ongoing",
-        description: "My personal site, written in Rust with Leptos and styled with Tailwind. Server-side rendered and hydrated in WebAssembly.",
-        tags: &["Rust", "Leptos", "Tailwind"],
+        description: "My personal site, written in Rust with Leptos and styled with Tailwind. Server-side rendered and hydrated in WebAssembly. 
+        It's gone through iterations in Vue and React. This Rust version has been super fun, and this time around I've been enjoying making use of AI
+        to help me do fancy-but-tedious things like adding pretty animations.",
+        tags: &["Rust", "Leptos", "Tailwind", "AI Assited"],
     },
     Project {
-        title: "Project Two",
-        tagline: "A short summary",
-        status: "Completed",
-        description: "A longer description of what this project is, why I built it, and what I learned along the way.",
-        tags: &["Systems", "C"],
+        title: "AIrys",
+        tagline: "A personal support AI",
+        status: "Ongoing",
+        description: "An AI agent I've been dreaming up to support people like me who may struggle with day to day managerial tasks like keeping up with calendars,
+        making appointments, and remembering to eat. I envision something like a mini version of the Thunderhead from Neal Shusterman's Arc of a Scythe universe. Ideally,
+        I want this system to run on the edge, on consumer hardware.",
+        tags: &["Artificial Intellicence", "Python", "HuggingFace", "LLM", "Finetuning", "Agentic AI"],
     },
     Project {
-        title: "Project Three",
-        tagline: "A short summary",
-        status: "In progress",
-        description: "A longer description of what this project is, why I built it, and what I learned along the way.",
-        tags: &["AI", "Python"],
+        title: "Laplus Daemon",
+        tagline: "Writing about what thrills me",
+        status: "Ongoing",
+        description: "I'm trying my hand at running a Substack where I tackle writing about the big questions, ideas, and fascinations I have. It's linked on my homepage or you can look it up, @laplusdaemon",
+        tags: &["Writing", "Philosophy", "Creative"],
     },
 ];
 
