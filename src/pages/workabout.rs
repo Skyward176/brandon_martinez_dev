@@ -6,11 +6,11 @@ pub fn WorkAbout() -> impl IntoView {
     let (show_resume, set_show_resume) = signal(false);
 
     view! {
-        <div class="text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col bg-white dark:bg-zinc-900">
-            <main class="flex-1 mx-auto max-w-6xl w-full px-4">
-                <div class="flex flex-row gap-6 py-8">
+        <div class="text-zinc-900 dark:text-zinc-100 min-h-screen bg-zinc-100 dark:bg-zinc-900">
+            <div class="mx-auto max-w-6xl w-full px-4">
+                <div class="flex flex-col md:flex-row gap-8 md:gap-12 py-8">
                     // Left column — professional summary
-                    <div class="flex-1 min-w-0 max-w-md">
+                    <div class="flex-1 min-w-0 md:max-w-md">
                         <h1 class="text-3xl mb-4">
                             "What I do for money"
                         </h1>
@@ -20,7 +20,7 @@ pub fn WorkAbout() -> impl IntoView {
                     </div>
 
                     // Right column — the rest of the details
-                    <div class="flex-1 min-w-0 max-w-xl">
+                    <div class="flex-1 min-w-0 md:max-w-xl">
                         // Education highlights
                         <div class="text-zinc-900 dark:text-zinc-100">
                             <h2 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-3">
@@ -131,7 +131,7 @@ pub fn WorkAbout() -> impl IntoView {
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     }
 }

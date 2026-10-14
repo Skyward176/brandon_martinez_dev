@@ -17,12 +17,101 @@
     text-decoration-color 350ms ease,
     fill 350ms ease,
     stroke 350ms ease,
-    transform 200ms ease !important;
+    opacity 300ms ease,
+    transform 200ms ease,
+    translate 200ms ease,
+    rotate 200ms ease,
+    scale 200ms ease !important;
+}
+
+/* Brand name: "ris " and "artinez" collapse away on mobile, leaving "IM". */
+.brand-tail {
+  display: inline-block;
+  overflow: hidden;
+  white-space: pre;
+  vertical-align: bottom;
+  max-width: 10ch;
+  opacity: 1;
+}
+.theme-transition .brand-tail-last {
+  transition: max-width 300ms ease, opacity 200ms ease !important;
+}
+/* The trailing letters collapse first; the leading ones follow. When expanding, the order reverses. */
+.theme-transition .brand-tail-first {
+  transition: max-width 300ms ease 120ms, opacity 200ms ease 120ms !important;
+}
+@media (max-width: 639px) {
+  .brand-tail {
+    max-width: 0;
+    opacity: 0;
+  }
+}
+@media (min-width: 640px) {
+  .theme-transition .brand-tail-last {
+    transition: max-width 300ms ease 120ms, opacity 200ms ease 120ms !important;
+  }
+  .theme-transition .brand-tail-first {
+    transition: max-width 300ms ease, opacity 200ms ease !important;
+  }
+}
+
+/* Mobile menu: unrolls by animating its grid row from 0fr to 1fr. */
+.menu-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+.menu-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.theme-transition .menu-panel {
+  transition: grid-template-rows 300ms ease, opacity 300ms ease !important;
+}
+
+/* Page transitions (View Transitions API, enabled via <Routes transition=true>). */
+.router-outlet-0 .page-outlet {
+  view-transition-name: page;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; } }
+@keyframes vt-slide-out-left { to { transform: translateX(-100%); opacity: 0; } }
+@keyframes vt-slide-out-right { to { transform: translateX(100%); opacity: 0; } }
+@keyframes vt-slide-in-from-right { from { transform: translateX(100%); opacity: 0; } }
+@keyframes vt-slide-in-from-left { from { transform: translateX(-100%); opacity: 0; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Mobile: fade the old page out, then fade the new one in. */
+  ::view-transition-old(page) { animation: vt-fade-out 180ms ease both; }
+  ::view-transition-new(page) { animation: vt-fade-in 220ms ease 180ms both; }
+
+  /* Desktop: slide across in the direction of the nav order. */
+  @media (min-width: 640px) {
+    .nav-forward::view-transition-old(page) { animation: vt-slide-out-left 350ms ease both; }
+    .nav-forward::view-transition-new(page) { animation: vt-slide-in-from-right 350ms ease both; }
+    .nav-backward::view-transition-old(page) { animation: vt-slide-out-right 350ms ease both; }
+    .nav-backward::view-transition-new(page) { animation: vt-slide-in-from-left 350ms ease both; }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .theme-transition,
-  .theme-transition * {
+  .theme-transition *,
+  .theme-transition .brand-tail-first,
+  .theme-transition .brand-tail-last,
+  .theme-transition .menu-panel {
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
